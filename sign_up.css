@@ -1,0 +1,109 @@
+body {
+  background-color: #effbfb;
+}
+/*header*/
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+
+.signBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #a9f5e1;
+  height: 40px;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.top a {
+  color: #088a85;
+  font-size: 15px;
+  outline: none;
+}
+.top li {
+  padding: 0px 20px;
+}
+
+/*signUp_form*/
+.sign_up {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+.sign_up input {
+  width: 460px;
+  height: 48px;
+  border: 1px solid lightskyblue;
+  outline: none;
+}
+
+.sign_up #email {
+  width: 400px;
+  height: 48px;
+  border: 1px solid lightblue;
+  outline: none;
+}
+
+.sign_up #check {
+  height: 48px;
+}
+
+.sign_up div {
+  margin-top: 10px;
+}
+#search_ad2 {
+  margin-top: 10px;
+}
+
+#address {
+  width: 460px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+#address input {
+  width: 140px;
+  height: 48px;
+  margin-right: 14px;
+}
+#address .postcodify_extra_info {
+  margin-right: 0px;
+}
+#address .postcodify_postcode5 {
+  width: 400px;
+  height: 48px;
+}
+.sign_up #sign_btn {
+  width: 460px;
+  height: 48px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/*footer*/
+.others {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  height: 200px;
+  border-top: 1px solid black;
+}
+
+/*너비 줄어들면 어느순간 고정*/
+@media screen and (max-width: 1100px) {
+  html {
+    width: 1100px;
+  }
+}

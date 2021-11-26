@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <script src="main.js"></script>    
+    <link rel="stylesheet" href="sign_in.css">
+    <script src="sign_in.js"></script>
     <script src="https://kit.fontawesome.com/a5f3739fb3.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="https://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -15,13 +15,21 @@
 <body>
     <header class="signBar">
         <ul class="top">
-            <li><a href="sign_in.html">로그인</a></li>
+            <li><a href="Log_in.html">로그인</a></li>
             <li><a href="sign_up.html">회원가입</a></li>
             <li><a href="log-in">마이페이지</a></li>
         </ul>
     </header>
 
-    
+    <form autocomplete="off" action="#" accept-charset="utf-8" class="log_in" name="log_in" method="post">
+        <input type="email" id="email" name="email" placeholder="아이디" onfocus="this.placeholder=''" onblur="this.placeholder='아이디'">
+        <input type="password" id="pw" name="pw" placeholder="비밀번호" onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호'">
+        <button type="submit" value="submit">로그인</button>
+        <ul id="addition">
+            <li><a href="sign_up">회원가입</a></li>
+            <li><a href="find_pw">비밀번호 찾기</a></li>
+        </ul>
+    </form>
 
     <footer class="others">
         <ul>
