@@ -16,7 +16,7 @@
       display: flex;
       justify-content: end;
       align-items: center;
-      background-color: mediumspringgreen;
+      background-color: #a9f5e1;
       height: 40px;
   }
 
@@ -26,7 +26,7 @@
     font-size: 13px;
   }
   .top a {
-    color: white;
+    color: #088a85;
     font-size: 15px; 
     outline: none;
   }
