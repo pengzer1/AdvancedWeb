@@ -68,6 +68,7 @@
 
 #hobby {
   display: flex;
+  flex-wrap: wrap;
   width: 430px;
   height: 280px;
   margin-right: 20px;
@@ -75,6 +76,7 @@
 
 #free {
   display: flex;
+  flex-wrap: wrap;
   width: 430px;
   height: 280px;
   margin-left: 20px;
@@ -82,6 +84,7 @@
 
 #best {
   display: flex;
+  flex-wrap: wrap;
   width: 430px;
   height: 280px;
   margin-right: 20px;
@@ -90,6 +93,7 @@
 
 #worry {
   display: flex;
+  flex-wrap: wrap;
   width: 430px;
   height: 280px;
   margin-left: 20px;
@@ -99,8 +103,8 @@
 .mainTitle {
   display: flex;
   width: 400px;
-  height: 30px;
-  font-size: 14px;
+  height: 40px;
+  font-size: 18px;
   border-bottom: 1px solid gray;
 }
 
@@ -108,9 +112,22 @@
   display: flex;
   justify-content: center;
   width: 30px;
-  height: 30px;
-  font-size: 15px;
+  height: 40px;
+  font-size: 18px;
   border-bottom: 1px solid gray;
+}
+
+#pre {
+  display: flex;
+  width: 430px;
+  height: 220px;
+  margin-top: 10px;
+}
+
+#pre .boardList li {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 /*footer*/
