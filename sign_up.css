@@ -1,6 +1,12 @@
-body {
-  background-color: #effbfb;
+button {
+  border-radius: 5px;
+  border: 1px solid skyblue;
+  background-color: #a9f5e1;
+  color: #088a85;
+  padding: 5px;
+  font-size: 18px;
 }
+
 /*header*/
 * {
   margin: 0px;
@@ -55,7 +61,7 @@ body {
 }
 
 .sign_up #email {
-  width: 400px;
+  width: 370px;
   height: 48px;
   border: 1px solid lightblue;
   outline: none;
