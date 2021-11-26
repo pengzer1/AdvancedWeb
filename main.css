@@ -1,0 +1,49 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    outline: none;
+  }
+
+  .signBar{
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      background-color: mediumspringgreen;
+      height: 40px;
+  }
+
+  .top {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 13px;
+  }
+  .top a {
+    color: white;
+    font-size: 15px;
+    outline: none;
+  }
+  .top li {
+    padding: 0px 20px;
+  }
+
+    /*footer*/
+    .others {
+        display: flex;
+        justify-content: center;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+        height: 200px;
+        border-top: 1px solid black;
+      }
+      
+      /*너비 줄어들면 어느순간 고정*/
+      @media screen and (max-width: 1100px) {
+        html {
+          width: 1100px;
+        }
+      }
+      
