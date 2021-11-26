@@ -52,14 +52,64 @@
 .child {
   margin-left: 30px;
 }
-#showBoard {
-  width: 900px;
-  height: 600px;
-  background-color: rosybrown;
-  margin-left: 100px;
-}
+
 .listTitle {
   border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+#showBoard {
+  display: flex;
+  flex-wrap: wrap;
+  width: 900px;
+  height: 600px;
+  margin-left: 100px;
+}
+
+#hobby {
+  display: flex;
+  width: 430px;
+  height: 280px;
+  margin-right: 20px;
+}
+
+#free {
+  display: flex;
+  width: 430px;
+  height: 280px;
+  margin-left: 20px;
+}
+
+#best {
+  display: flex;
+  width: 430px;
+  height: 280px;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+#worry {
+  display: flex;
+  width: 430px;
+  height: 280px;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+.mainTitle {
+  display: flex;
+  width: 400px;
+  height: 30px;
+  font-size: 14px;
+  border-bottom: 1px solid gray;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
   border-bottom: 1px solid gray;
 }
 
