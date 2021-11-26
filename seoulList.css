@@ -46,10 +46,17 @@
     justify-content: center;
     width: 250px;
     height: 600px;
-    border: 1px solid gray
 }
 .child{
+    font-size: 14px;
     margin-left: 30px;
+}
+.child li {
+    margin-top: 10px;
+}
+.child li a:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 #showBoard{
     width: 900px;
@@ -58,8 +65,9 @@
     margin-left: 100px;
 }
 .listTitle{
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    font-size: 18px;
+    border-top: 3px solid #ebebea;
+    border-bottom: 1px solid #ebebea;
 }
 
 .eventBody {
