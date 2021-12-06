@@ -136,6 +136,10 @@
   margin-bottom: 5px;
   font-size: 16px;
 }
+#pre .boardList li a:hover{
+  text-decoration: underline;
+  cursor:pointer;
+}
 
 /*footer*/
 .others {
