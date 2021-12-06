@@ -1,0 +1,100 @@
+/*header*/
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+
+.signBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #a9f5e1;
+  height: 40px;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.top a {
+  color: #088a85;
+  font-size: 15px;
+  outline: none;
+}
+.top li {
+  padding: 0px 20px;
+}
+
+/*body*/
+#outter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#wrapImageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#picture {
+  display: flex;
+  width: 1000px;
+  height: 600px;
+  background-image: url("./background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#btnDiv {
+  width: 1100px;
+}
+#btnDiv > ul {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+#btnDiv > ul > li > button {
+  width: 200px;
+  height: 100px;
+  border-radius: 5px;
+  border: 1px solid skyblue;
+  background-color: rgba(0, 0, 0, 0);
+  color: skyblue;
+  padding: 5px;
+  font-size: 20px;
+}
+#btnDiv > ul > li > button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: skyblue;
+}
+
+/*footer*/
+.others {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  height: 200px;
+  border-top: 1px solid black;
+}
+
+/*너비 줄어들면 어느순간 고정*/
+@media screen and (max-width: 1100px) {
+  html {
+    width: 1100px;
+  }
+}
