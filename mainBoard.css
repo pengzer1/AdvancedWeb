@@ -36,26 +36,33 @@
 }
 
 /*body*/
-#wholeBoard {
+#wholeBoard{
   display: flex;
   justify-content: center;
   margin-top: 50px;
 }
-#list {
+#list{
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 250px;
   height: 600px;
-  border: 1px solid gray;
 }
-.child {
+.child{
+  font-size: 14px;
   margin-left: 30px;
 }
-
-.listTitle {
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+.child li {
+  margin-top: 10px;
+}
+.child li a:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.listTitle{
+  font-size: 18px;
+  border-top: 3px solid #ebebea;
+  border-bottom: 1px solid #ebebea;
 }
 
 #showBoard {

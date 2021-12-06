@@ -1,0 +1,24 @@
+{
+  "name": "neighbor",
+  "version": "1.0.0",
+  "description": "neighbor Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengzer1/AdvancedWeb.git"
+  },
+  "author": "lsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pengzer1/AdvancedWeb/issues"
+  },
+  "homepage": "https://github.com/pengzer1/AdvancedWeb#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
