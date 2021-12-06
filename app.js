@@ -17,6 +17,9 @@ var app = http.createServer(function(request,response){
     else if(url == '/seoulList.html'){
         url = '/seoulList.html'
     }
+    else if(url == '/chat.html'){
+        url = '/chat.html';
+    }
     if(url == 'favicon.ico'){
         return response.writeHead(404);
     }
