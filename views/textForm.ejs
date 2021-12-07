@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/textForm.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>Neighbor</title>
+</head>
+<body>
+    
+    <% include header %>
+    
+    <div id="editOutter">
+        <div id="listDiv">
+            <div id="listName">
+                <a href="/seoulList">낙서장 ></a>
+            </div>
+            <div id="edit">
+                
+                <div style="width: 1050px; padding-left:50px;">
+                    <div class="tit">
+                        제목
+                    </div>
+                    <div id="who">
+                        작성자: <a href="#">이승호</a>
+                    </div>
+                    <div style="width:1050px; height: 500px; margin-top: 30px;">
+                        sdfsdfsdf
+                        asg
+                        sad
+                        asdg
+                        asdg
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="comment">
+            <span id="dat">댓글</span>
+            <% for(var i = 0; i < 3; i++){ %>
+                        
+                <% include comment %>
+            
+            <% } %>
+        </div>
+        <form action="#" method="post" id="addComment">
+            <span>내 닉네임</span>
+            <textarea placeholder="댓글을 남겨보세요."></textarea>
+            <button type="submit" style=" width:50px;"> 등록</button>
+        </form>
+    </div>
+    
+    <% include footer %>
+</body>
+</html>

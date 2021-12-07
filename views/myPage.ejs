@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/myPage.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>Neighbor</title>
 </head>
 <body>
     
+    <% include header %>
+    <div id="wholeBoard">
+        <div id="list">
+            <ul id="outList">
+                <li style="font-size: 20px; margin-bottom: 10px;">Neighbor</li>
+                <li class="listTitle">
+                    마이페이지
+                </li>
+                <li>
+                    <ul class="child">
+                        <li><a href="/myPage">ㄴ내가 쓴 글</a></li>
+                        <li><a href="/profile">ㄴ프로필 변경</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/delId">ㄴ회원탈퇴</a></li>
+                    </ul>
+                
+            </ul>
+        </div>
+        <div class="showBoard">
+            <div class="test" id="event">
+                <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
+                    <span id="title">내가 쓴 글</span>
+                </nav>
+                <ul class="boardList">
+                   <li>
+                        <ul id="attribute">
+                            <li style="margin-left:282px; line-height: 30px;">제목</li>
+                            <li style="margin-left:320px; line-height: 30px;">작성일</li>
+                            <li style="margin-left:69px; margin-right:45px; line-height: 30px;">댓글</li>
+                        </ul>
+                    </li>
+                    <% for(var i = 0; i < 8; i++){ %>
+                        
+                        <% include listForm %>
+                    
+                    <% } %>
+                </ul>
+                <div class="paging">
+                    paging 들어갈 부분
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<% include footer %>
 </body>
+<% include paging %>
 </html>

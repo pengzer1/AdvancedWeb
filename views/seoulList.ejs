@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/seoulList.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <title>Neighbor</title>
 </head>
 <body>
@@ -48,10 +49,6 @@
             <div class="test" id="event">
                 <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
                     <span id="title">서울 게시판</span>
-                    <ul id="sort">
-                        <li><a href="#">최신순</a></li>
-                        <li><a href="#">인기순</a></li>
-                    </ul>
                 </nav>
                 <ul class="boardList">
                    <li>
@@ -70,7 +67,7 @@
                         <button id ="goInput" onclick="location.href='/editText'">글쓰기</button>
                     </li>
                 </ul>
-                <div id="paging">
+                <div class="paging">
                     paging 들어갈 부분
                 </div>
                 <div id="search">
@@ -93,4 +90,5 @@
     
     <script src="main.js"></script>
 </body>
+<% include paging %>
 </html>

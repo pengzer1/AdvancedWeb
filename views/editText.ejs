@@ -26,7 +26,7 @@
                 <textarea id="input" name="input" rows="10" cols="100" placeholder="여기에 작성하세요" style="font-size: 20px;"></textarea>
                 <div id="btnDiv">
                     <button type="submit" class="Btn">작성</button>
-                    <button type="button" class="Btn" onclick="location.href='/seoulList'">취소</button>
+                    <button type="button" class="Btn" onclick='back()'">취소</button>
                 </div>
             </form>
         </div>
@@ -34,4 +34,10 @@
 
     <% include footer %>
 </body>
+<script>
+    function back() {
+        history.back();
+    }
+</script>
+</script>
 </html>

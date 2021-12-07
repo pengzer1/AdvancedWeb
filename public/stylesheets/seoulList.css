@@ -90,14 +90,6 @@
       width:120px;
       font-size: 20px;
   }
-  #sort {
-    display: flex;
-    width: 85px;
-    font-size: 13px;
-    justify-content: space-between;
-    text-decoration: underline;
-    margin-left: 690px;
-  }
   .showBoard .boardList {
     width: 895px;
     height: 428px;
@@ -150,7 +142,7 @@
     margin-top: 15px;
     margin-left: 700px;
   }
-  #paging {
+  .paging {
       display: flex;
       justify-content: center;
       align-items: center;

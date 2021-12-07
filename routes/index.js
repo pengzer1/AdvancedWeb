@@ -11,11 +11,11 @@ router.get('/sign_in', function(req, res, next){
 router.get('/sign_up', function(req, res, next){
   res.render('sign_up');
 });
-router.get('/mainBoard', function(req, res, next){
-  res.render('mainBoard');
-});
 router.get('/seoulList', function(req, res, next){
   res.render('seoulList');
+});
+router.get('/textForm', function(req, res, next){
+  res.render('textForm');
 });
 router.get('/map', function(req, res, next){
   res.render('map');
@@ -26,6 +26,14 @@ router.get('/chat', function(req, res, next){
 router.get('/editText', function(req, res, next){
   res.render('editText');
 });
-
+router.get('/myPage', function(req, res, next){
+  res.render('myPage');
+});
+router.get('/profile', function(req, res, next){
+  res.render('profile');
+});
+router.get('/delId', function(req, res, next){
+  res.render('delId');
+});
 
 module.exports = router;
