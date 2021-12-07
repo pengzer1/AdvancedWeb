@@ -10,23 +10,25 @@
 <body>
     <% include header %>
     <div id="editOutter">
-        <div id="listName">
-            낙서장
-        </div>
+
         <div id="edit">
             
-            <form action="#" method="post" style="width: 1050px;">
+            <form action="/editText" method="post" style="width: 1050px;">
+                <div name="listName" id="listName">
+                    낙서장
+                </div>
+                <input type="hidden" name="listName" value="낙서장">
                 <div style="margin-top:30px; font-size: 25px; width:1050px">
                     제목
                 </div>
-                <input type="text" style="width: 1055px; height: 30px; font-size: 25px;">
+                <input name="name" type="text" style="width: 1055px; height: 30px; font-size: 25px;">
                 <div style="margin-top:30px; font-size: 25px; width:1050px">
                     글쓰기
                 </div>
                 <textarea id="input" name="input" rows="10" cols="100" placeholder="여기에 작성하세요" style="font-size: 20px;"></textarea>
                 <div id="btnDiv">
                     <button type="submit" class="Btn">작성</button>
-                    <button type="button" class="Btn" onclick="location.href='/seoulList'">취소</button>
+                    <button type="button" class="Btn" onclick='back()'">취소</button>
                 </div>
             </form>
         </div>
@@ -34,4 +36,9 @@
 
     <% include footer %>
 </body>
+<script>
+    function back() {
+        history.back();
+    }
+</script>
 </html>
