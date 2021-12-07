@@ -17,6 +17,9 @@ router.get('/mainBoard', function(req, res, next){
 router.get('/seoulList', function(req, res, next){
   res.render('seoulList');
 });
+router.get('/map', function(req, res, next){
+  res.render('map');
+});
 router.get('/chat', function(req, res, next){
   res.render('chat');
 });
