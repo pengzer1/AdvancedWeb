@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/seoulList.css">
+    <title>Neighbor</title>
+</head>
+<body>
+   
+    <% include header %>
+    
+    <div id="wholeBoard">
+        <div id="list">
+            <ul id="outList">
+                <li style="font-size: 20px; margin-bottom: 10px;">Neighbor</li>
+                <li class="listTitle">
+                    지역별
+                </li>
+                <li>
+                    <ul class="child">
+                        <li><a href="/seoulList">ㄴ서울</a></li>
+                        <li><a href="/seoulList">ㄴ경기</a></li>
+                        <li><a href="/seoulList">ㄴ강원</a></li>
+                        <li><a href="/seoulList">ㄴ충북</a></li>
+                        <li><a href="/seoulList">ㄴ충남</a></li>
+                        <li><a href="/seoulList">ㄴ전북</a></li>
+                        <li><a href="/seoulList">ㄴ전남</a></li>
+                        <li><a href="/seoulList">ㄴ경북</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/seoulList">ㄴ경남</a></li>
+                    </ul>
+                </li>
+                <li class="listTitle">
+                    이모저모
+                </li>
+                <li>
+                    <ul class="child">
+                        <li><a href="/seoulList">ㄴ취미/소모임</a></li>
+                        <li><a href="/seoulList">ㄴ낙서장</a></li>
+                        <li><a href="/seoulList">ㄴ핫추</a></li>
+                        <li><a href="/seoulList">ㄴ고민 상담소</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="showBoard">
+            <div class="test" id="event">
+                <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
+                    <span id="title">서울 게시판</span>
+                    <ul id="sort">
+                        <li><a href="#">최신순</a></li>
+                        <li><a href="#">인기순</a></li>
+                    </ul>
+                </nav>
+                <ul class="boardList">
+                   <li>
+                        <ul id="attribute">
+                            <li style="margin-left:282px; line-height: 30px;">제목</li>
+                            <li style="margin-left:320px; line-height: 30px;">작성일</li>
+                            <li style="margin-left:69px; margin-right:45px; line-height: 30px;">댓글</li>
+                        </ul>
+                   </li>
+                    <% for(var i = 0; i < 8; i++){ %>
+                        
+                            <% include listForm %>
+                        
+                    <% } %>
+                    <li>
+                        <button id ="goInput" onclick="location.href='/editText'">글쓰기</button>
+                    </li>
+                </ul>
+                <div id="paging">
+                    paging 들어갈 부분
+                </div>
+                <div id="search">
+                    <form action="" method="post">
+                        <select name="searchRange" id="searchRange">
+                            <option value="title">제목</option>
+                            <option value="contents">내용</option>
+                            <option value="writer">작성자</option>
+                        </select>
+                        <input id="searchWhat" type="text">
+                        <button id="goSearch" type="submit">검색</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <% include footer %>
+    
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+
+.signBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #a9f5e1;
+  height: 40px;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.top a {
+  color: #088a85;
+  font-size: 15px;
+  outline: none;
+}
+.top li {
+  padding: 0px 20px;
+}
+
+/*body*/
+#wholeBoard{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+#list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 600px;
+}
+.child{
+  font-size: 14px;
+  margin-left: 30px;
+}
+.child li {
+  margin-top: 10px;
+}
+.child li a:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.listTitle{
+  font-size: 18px;
+  border-top: 3px solid #ebebea;
+  border-bottom: 1px solid #ebebea;
+}
+
+#showBoard {
+  display: flex;
+  flex-wrap: wrap;
+  width: 900px;
+  height: 600px;
+  margin-left: 100px;
+}
+
+#hobby {
+  display: flex;
+  flex-wrap: wrap;
+  width: 430px;
+  height: 280px;
+  margin-right: 20px;
+}
+
+#free {
+  display: flex;
+  flex-wrap: wrap;
+  width: 430px;
+  height: 280px;
+  margin-left: 20px;
+}
+
+#best {
+  display: flex;
+  flex-wrap: wrap;
+  width: 430px;
+  height: 280px;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+#worry {
+  display: flex;
+  flex-wrap: wrap;
+  width: 430px;
+  height: 280px;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+.mainTitle {
+  display: flex;
+  width: 400px;
+  height: 40px;
+  font-size: 18px;
+  border-bottom: 1px solid gray;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  width: 30px;
+  height: 40px;
+  font-size: 18px;
+  border-bottom: 1px solid gray;
+}
+
+#pre {
+  display: flex;
+  width: 430px;
+  height: 220px;
+  margin-top: 10px;
+}
+
+#pre .boardList li {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+#pre .boardList li a:hover{
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+/*footer*/
+.others {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  height: 200px;
+  border-top: 1px solid black;
+}
+
+/*너비 줄어들면 어느순간 고정*/
+@media screen and (max-width: 1100px) {
+  html {
+    width: 1100px;
+  }
+}
