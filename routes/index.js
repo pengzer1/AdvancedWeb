@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var models = require('../models');
 var crypto = require('crypto');
+const { connect } = require('http2');
 
 var client = mysql.createConnection({
   host: 'localhost',
@@ -54,17 +55,14 @@ router.post('/sign_up', function(req, res, next) {
   res.redirect("/sign_in");
 });
 
-
 router.get('/mainBoard', function(req, res, next){
   res.render('mainBoard');
 });
 router.get('/seoulList', function(req, res, next){
-  models.text.findAll().then(result => {
-    res.render('seoulList', {
-      text: result
-    });
-  });
+  res.render('seoulList');
 });
+
+
 router.get('/textForm', function(req, res, next){
   res.render('textForm');
 });
