@@ -59,13 +59,13 @@ button {
   border: 1px solid lightskyblue;
   outline: none;
 }
-#postcode1{
+#postcode1 {
   width: 365px;
 }
-#detailAddress1{
-  width:352px;
+#detailAddress1 {
+  width: 352px;
 }
-#extraAddress1{
+#extraAddress1 {
   width: 100px;
 }
 

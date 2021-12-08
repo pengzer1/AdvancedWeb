@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/pwConfirm.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>Neighbor</title>
+</head>
+<body>
+    
+    <% include header %>
+        <div class="showBoard">
+            <div class="test" id="event">
+                <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
+                    <span id="title">비밀번호 확인</span>
+                </nav>
+                <form  id="confirmPw" action="/pwConfirm" method="post">
+                    비밀번호<br>
+                    <div>
+                        <input type="password" placeholder="비밀번호 확인" id="pwIn" name="pw">
+                        <button type="submit">확인</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+    
+<% include footer %>
+</body>
+
+</html>
