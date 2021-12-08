@@ -49,6 +49,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      salt: {
+        type: Sequelize.STRING
       }
     });
   },

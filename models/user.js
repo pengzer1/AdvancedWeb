@@ -38,7 +38,10 @@ module.exports = (sequelize, DataTypes) => {
     detailAddress: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+   salt:{
+     type: DataTypes.STRING
+   }
   });
   return user;
 };

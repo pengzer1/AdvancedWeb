@@ -8,7 +8,7 @@ var client = mysql.createConnection({
   host: 'localhost',
   port: '3306',
   user: 'root',
-  password: 'ckalswo6312!',
+  password: '1234',
   database: 'neighbor',
   multipleStatements: true
 })
@@ -35,23 +35,23 @@ router.get('/sign_up', function(req, res, next){
 router.post('/sign_up', function(req, res, next) {
   let body = req.body;
 
-  models.user.create({
+  let inputPassword = body.pw;
+  let salt = Math.round((new Date().valueOf() * Math.random())) + "";
+  let hashpw = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+
+  let result = models.user.create({
     name: body.name,
     email: body.email,
-    pw: body.pw,
+    pw: hashpw,
     phone: body.phone,
     birth: body.birth,
     postcode: body.postcode,
     modifyAddress: body.modifyAddress,
-    detailAddress: body.detailAddress
+    detailAddress: body.detailAddress,
+    salt: salt
   })
-      .then( result => {
-          console.log("데이터 추가 완료");
-          res.redirect("/sign_in");
-      })
-      .catch( err => {
-          console.log("데이터 추가 실패");
-      })
+
+  res.redirect("/sign_in");
 });
 
 
@@ -59,7 +59,11 @@ router.get('/mainBoard', function(req, res, next){
   res.render('mainBoard');
 });
 router.get('/seoulList', function(req, res, next){
-  res.render('seoulList');
+  models.text.findAll().then(result => {
+    res.render('seoulList', {
+      text: result
+    });
+  });
 });
 router.get('/textForm', function(req, res, next){
   res.render('textForm');
@@ -79,7 +83,7 @@ router.post('/editText', function(req, res, next) {
   let body = req.body;
 
   models.text.create({
-    listName: body,listName,
+    listName: body.listName,
       name: body.name,
       input: body.input
   })

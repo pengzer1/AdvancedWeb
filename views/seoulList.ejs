@@ -58,9 +58,12 @@
                             <li style="margin-left:69px; margin-right:45px; line-height: 30px;">댓글</li>
                         </ul>
                    </li>
-                    <% for(var i = 0; i < 8; i++){ %>
-                        
-                            <% include listForm %>
+                    <% for(let texts of text){ %>
+                        <li>
+                            <div class="name"><a href="/textForm"><%= texts.name %></a></div>
+                            <div class="date"><%= texts.createdAt %></div>
+                            <div class="comment">댓글</div>
+                        </li>
                         
                     <% } %>
                     <li>
@@ -88,7 +91,6 @@
     
     <% include footer %>
     
-    <script src="main.js"></script>
 </body>
 <% include paging %>
 </html>
