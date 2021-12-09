@@ -3,8 +3,6 @@ var router = express.Router();
 var mysql = require('mysql2');
 var models = require('../models');
 var crypto = require('crypto');
-const { connect } = require('http2');
-var session = require('express-session');
 
 var client = mysql.createConnection({
   host: 'localhost',
@@ -22,15 +20,15 @@ client.connect(e => {
   console.log('mysql running')
 })
 
+let session;
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Neighbor' });
+  session = req.session;
+  res.render('index', { title: 'Neighbor', session: session });
 });
 
 // 로그인 GET
 router.get('/sign_in', function(req, res, next){
-  let session = req.session;
-
   res.render("sign_in", {
       session : session
   });
@@ -53,10 +51,15 @@ router.post("/sign_in", async function(req,res,next){
     let inputPassword = body.pw;
     let salt = result.dataValues.salt;
     let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+    let dbName = result.dataValues.name;
   
     if(dbPassword === hashPassword){
         console.log("비밀번호 일치");
         // 세션 설정
+        models.user.findAll({ where: {email: result.email}}).then(result => {
+          req.session.name = result;
+        })
+        req.session.name = dbName;
         req.session.email = body.email;
         res.redirect('/');
     }
@@ -82,7 +85,7 @@ router.route('/logout').get(                      //설정된 쿠키정보를 �
                   console.log('세션 삭제 성공');
                   res.clearCookie('sid');
                   //파일 지정시 제일 앞에 / 를 붙여야 root 즉 public 안에서부터 찾게 된다
-                  res.redirect('/sign_in');
+                  res.redirect('/');
               }
           );          //세션정보 삭제
 
@@ -93,16 +96,8 @@ router.route('/logout').get(                      //설정된 쿠키정보를 �
   }
 );
 
-//로그아웃 GET
-/*router.get("/logout", function(req,res){
-  req.session.destroy();
-  res.clearCookie("sid");
-
-  res.redirect("/sign_in");
-});*/
-
 router.get('/sign_up', function(req, res, next){
-  res.render('sign_up');
+    res.render('sign_up', { session: session});
 });
 
 //회원가입 Form
@@ -128,8 +123,10 @@ router.post('/sign_up', function(req, res, next) {
   res.redirect("/sign_in");
 });
 
+
+
 router.get('/mainBoard', function(req, res, next){
-  res.render('mainBoard');
+  res.render('mainBoard', { session: session });
 });
 router.get('/mainBoard', function(req, res, next){
   res.render('mainBoard');
@@ -145,7 +142,7 @@ var whe = req.params.whe;
     {
         if(err) console.error(err);
         res.render('textForm', {row:row[0], where:whe});
-    });
+  });
 });
 //페이징
 router.get('/list/:whe/:page',function(req,res,next)
@@ -157,25 +154,25 @@ router.get('/list/:whe/:page',function(req,res,next)
         if (err) console.error(err);
         client.query("select count(*) as count from texts where listName= '"+whe+"'" , (countQueryErr, countQueryResult) => {
           if (countQueryErr) console.error("err : " + countQueryErr);
-          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe});
+          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session});
         });
         
     });
 });
 
 router.get('/textForm', function(req, res, next){
-  res.render('textForm');
+  res.render('textForm', { session: session });
 });
 router.get('/map', function(req, res, next){
-  res.render('map');
+  res.render('map', { session: session });
 });
 router.get('/chat', function(req, res, next){
-  res.render('chat');
+  res.render('chat', { session: session });
 });
 //editText
 router.get('/editText/:whe', function(req, res, next){
   let whe = req.params.whe;
-  res.render('editText', {where: whe});
+  res.render('editText', {where: whe, session:session});
 });
 router.get('/myPage', function(req,res,next){
   res.render('myPage');
@@ -204,4 +201,112 @@ router.post('/edt/:whe', function(req, res, next) {
           console.log("데이터 추가 실패");
       })
 });
+
+router.get('/pwConfirm', function(req, res, next){
+  res.render('pwConfirm', { session: session });
+});
+//마이페이지 비밀번호 확인
+router.post('/pwConfirm', async function(req, res, next){
+  let body = req.body;
+
+  let result = await models.user.findOne({
+    where: {
+      email: session.email
+    }
+  });
+  if(result === null){
+    console.log("빈칸");
+  }
+  else{
+    console.log("값 있음");
+    let dbPassword = result.dataValues.pw;
+    let inputPassword = body.pw;
+    let salt = result.dataValues.salt;
+    let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+
+    if(dbPassword === hashPassword){
+      console.log("비밀번호 일치");
+      res.render('myPage',{session: session});
+    }
+    else{
+      console.log("비밀번호 불일치");
+      res.redirect("/delId");
+    }
+  }
+});
+
+router.get('/myPage', function(req, res, next){
+  res.render('myPage', { session: session });
+});
+
+router.get('/profile', function(req, res, next){
+  res.render('profile', { session: session });
+});
+//프로필 변경 기능
+router.post('/profile', async function(req, res, next){
+  let body = req.body;
+
+  let result = await models.user.findOne({
+    where: {
+        email : session.email
+    }});
+    if(result === null){
+    }
+    else{
+      let inputPassword = body.pw;
+      let salt = result.dataValues.salt;
+      let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+
+      models.user.update({pw: hashPassword, phone: body.phone, birth: body.birth, postcode: body.postcode, modifyAddress: body.modifyAddress, detailAddress: body.detailAddress},{where : { email: session.email }});
+
+      res.redirect('/');
+    }
+});
+
+router.get('/delId', function(req, res, next){
+  res.render('delId', { session: session });
+});
+//회원탈퇴 기능
+router.post('/delId', async function(req, res, next){
+  let body = req.body;
+
+  let result = await models.user.findOne({
+    where: {
+      email: session.email
+    }
+  });
+  if(result === null){
+    console.log("빈칸");
+  }
+  else{
+    console.log("값 있음");
+    let dbPassword = result.dataValues.pw;
+    let inputPassword = body.pw;
+    let salt = result.dataValues.salt;
+    let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+
+    if(dbPassword === hashPassword){
+      console.log("비밀번호 일치");
+      models.user.destroy({where: {email: session.email}});
+
+          req.session.destroy(
+              function (err) {
+                  if (err) {
+                      console.log('세션 삭제시 에러');
+                      return;
+                  }
+                  console.log('세션 삭제 성공');
+                  res.clearCookie('sid');
+                  //파일 지정시 제일 앞에 / 를 붙여야 root 즉 public 안에서부터 찾게 된다
+                  res.redirect('/');
+              }
+          );          //세션정보 삭제
+    }
+    else{
+      console.log("비밀번호 불일치");
+      res.redirect("/delId");
+    }
+  }
+});
+
 module.exports = router;

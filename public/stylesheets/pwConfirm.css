@@ -1,0 +1,130 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+#outter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #a9f5e1;
+  height: 40px;
+}
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+.top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.top a {
+  color: #088a85;
+  font-size: 15px;
+  outline: none;
+}
+.top li {
+  padding: 0px 20px;
+}
+
+/*body*/
+#wholeBoard {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+#outList {
+  height: 500px;
+}
+#list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 600px;
+}
+.child {
+  font-size: 14px;
+  margin-left: 30px;
+}
+.child li {
+  margin-top: 10px;
+}
+.child li a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.listTitle {
+  font-size: 18px;
+  border-top: 3px solid #ebebea;
+  border-bottom: 1px solid #ebebea;
+}
+
+.showBoard {
+  width: 955px;
+  height: 500px;
+  margin-left: 340px;
+}
+.showBoard .test {
+  position: absolute;
+  width: 955px;
+  height: 500px;
+}
+#title {
+  width: 140px;
+  font-size: 20px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 150px;
+}
+#confirmPw {
+  margin-top: 100px;
+}
+#pwIn {
+  width: 460px;
+  height: 25px;
+  border: none;
+  border-bottom: 3px solid #ebebeb;
+  outline: none;
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid skyblue;
+  cursor: pointer;
+  color: white;
+  background-color: skyblue;
+  padding: 5px;
+}
+
+/*footer*/
+.others {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+  border-top: 1px solid black;
+}
+
+/*너비 줄어들면 어느순간 고정*/
+@media screen and (max-width: 1100px) {
+  html {
+    width: 1100px;
+  }
+}

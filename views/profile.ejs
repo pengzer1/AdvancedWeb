@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/stylesheets/profile.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>Neighbor</title>
 </head>
@@ -37,10 +36,10 @@
                 </nav>
                 <form method="post" action="" style="margin-top:20px;  margin-left: 50px;">
                     <div>
-                        닉네임 <span style="margin-left: 50px;">나른행</span>
+                        닉네임 <span style="margin-left: 50px;"><%= session.name %> </span>
                     </div>
                     <div>
-                        아이디 <span style="margin-left: 50px;">xuwrgaf</span>
+                        아이디 <span style="margin-left: 50px;"><%= session.email %></span>
                     </div>
                     <div>
                         비밀번호<input type="password" class="password" id="pw" name="pw" placeholder="비밀번호" onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호'" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" title="소문자, 숫자, 특수문자 사용 8~16자리" required>
