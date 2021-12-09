@@ -53,9 +53,10 @@
                 <ul class="boardList">
                    <li>
                         <ul id="attribute">
-                            <li style="margin-left:282px; line-height: 30px;">제목</li>
-                            <li style="margin-left:320px; line-height: 30px;">작성일</li>
-                            <li style="margin-left:69px; margin-right:45px; line-height: 30px;">댓글</li>
+                            <li style="margin-left:230px; line-height: 30px;">제목</li>
+                            <li style="margin-left:260px; line-height: 30px;">작성자</li>
+                            <li style="margin-left:80px; line-height: 30px;">작성일</li>
+                            <li style="margin-left:78px; margin-right:45px; line-height: 30px;">댓글</li>
                         </ul>
                    </li>
                    
@@ -71,6 +72,7 @@
                    %>
                    <li>
                         <div class="name"><a href="/textForm/<%=where%>/<%=data.id%>"><%=data.title%></a></div>
+                        <div class="who"><%=data.name%></div>
                         <div class="date"><%=data.createdAt%></div>
                         <div class="comment">댓글</div>
                    </li>
