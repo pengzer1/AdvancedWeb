@@ -23,6 +23,8 @@ client.connect(e => {
 })
 
 let session;
+let searchWord;
+let searchRange;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   session = req.session;
@@ -207,13 +209,28 @@ router.get('/list/:whe/:page',function(req,res,next)
     });
 });
 //검색
-router.post('/list/:whe/search/:page', function(req,res,next){
+router.post('/list/:whe/search/', function(req,res,next){
   let body = req.body;
   let whe = req.params.whe;
-  let page = req.params.page;
-  let searchWord = body.searchWord;
-  let searchRange = body.searchRange;
+  let page = 1;
+  searchWord = body.searchWord;
+  searchRange = body.searchRange;
 
+    var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where "+ searchRange +" LIKE '%" + searchWord + "%' AND listName = '" + whe + "'";
+    client.query(sql, function (err, rows) {
+      if(err) console.error(err);
+      client.query("select count(*) as count from texts where "+ searchRange +" LIKE '%"+searchWord+"%' AND listName = '" + whe + "'", (countQueryErr, countQueryResult) => {
+        if(countQueryErr) console.error("err : " + countQueryErr);
+        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true});
+      });
+    });
+});
+//검색후 페이징
+router.get('/list/:whe/search/:page', function(req,res,next){
+  let whe = req.params.whe;
+  let page = req.params.page;
+  console.log(searchRange);
+  console.log(searchWord);
     var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where "+ searchRange +" LIKE '%" + searchWord + "%' AND listName = '" + whe + "'";
     client.query(sql, function (err, rows) {
       if(err) console.error(err);

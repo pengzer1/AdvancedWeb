@@ -83,7 +83,6 @@
                 </ul>
                 <div> <button id ="goInput" onclick="location.href='/editText/<%=where%>'">글쓰기</button> </div>
                 <div class="paging">
-                    <%if(search) {%>
                     <%
                     for(var j = 0; j < rows.length / page_num; j++){
                     %>
@@ -91,18 +90,9 @@
                     <%
                     }
                     %>
-                    <% } else { %>
-                        <%
-                    for(var j = 0; j < rows.length / page_num; j++){
-                    %>
-                    [<a href="<%= j + 1 %>"><%= j + 1 %></a>]
-                    <%
-                    }
-                    %>
-                    <% } %>
                 </div>
                 <div id="search">
-                    <form action="/list/<%=where%>/search/<%=page%>" method="post">
+                    <form action="/list/<%=where%>/search/" method="post">
                         <select name="searchRange" id="searchRange">
                             <option value="title">제목</option>
                             <option value="input">내용</option>
