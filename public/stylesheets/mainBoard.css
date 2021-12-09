@@ -132,9 +132,16 @@
 }
 
 #pre .boardList li {
+  display: flex;
+  justify-content: space-between;
   margin-left: 10px;
   margin-bottom: 5px;
   font-size: 16px;
+}
+#pre .boardList li a{
+  width:330px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #pre .boardList li a:hover{
   text-decoration: underline;
