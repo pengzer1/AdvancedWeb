@@ -11,27 +11,36 @@
 <body>
     
     <% include header %>
-    
-    <div id="editOutter">
-        <div id="listDiv">
-            <div id="listName">
-                <a href="/seoulList"><%=where%></a>
-            </div>
-            <div id="edit">
-                
-                <div style="width: 1050px; padding-left:50px;">
-                    <div class="tit">
-                        <%=row.title%>
-                    </div>
-                    <div id="who">
-                        작성자: <a href="#"><%=row.name%>></a>
-                    </div>
-                    <div style="width:1050px; height: 500px; margin-top: 30px;">
-                        <%=row.input%>
+    <form action="/delText" method="POST">
+        <div id="editOutter">
+            <div id="listDiv">
+                <div id="listName">
+                    <a href="/list/<%=where%>/1"><%=where%></a>
+                    <input type="hidden" name="whe" value="<%=where%>">
+                </div>
+                <div id="edit">
+                    
+                    <div style="width: 1050px; padding-left:50px;">
+                        <div class="tit">
+                            <%=row.title%>
+                            <input type="hidden" name="title" value="<%=row.title%>">
+                        </div>
+                        <div id="who">
+                            작성자: <a href="#"><%=row.name%>></a>
+                            <% if(session.name === row.name) {%>
+                                <button type="button" onclick="location.href='/editText/<%=where%>/<%=id%>/modify'">수정</button>
+                            <button type="submit">삭제</button>
+                            <% }%>
+                        </div>
+                        <div style="width:1050px; height: 500px; margin-top: 30px;">
+                            <%=row.input%>
+                            <input type="hidden" name="input" value="<%=row.input%>">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+    </form>
+
         <div id="comment">
             <span id="dat">댓글</span>
             <% for(var i = 0; i < 3; i++){ %>
