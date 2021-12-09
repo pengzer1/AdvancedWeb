@@ -188,7 +188,7 @@ router.post('/delText', async function(req, res, next) {
   else{
     console.log("있음");
 
-    models.texts.destroy({where: { name: session.name, title: body.title, input: body.input}});
+    models.texts.destroy({where: { name: session.name, title: body.title, input: body.input, id: body.textId}});
     res.redirect("/list/"+ body.whe + "/1");
   }
 });
@@ -280,9 +280,9 @@ router.post('/mod/:whe', function(req, res, next) {
   models.texts.update({
     title: body.title,
     input: body.input,
-  }, {where: {id: body.id}});
+  }, {where: {id: body.id}}
+  );
   res.redirect("/textForm/"+whe+"/"+body.id);
-  next();
 });
 //editText Post 부분
 router.post('/edt/:whe', function(req, res, next) {
