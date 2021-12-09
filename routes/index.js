@@ -8,7 +8,7 @@ var client = mysql.createConnection({
   host: 'localhost',
   port: '3306',
   user: 'root',
-  password: '1234',
+  password: 'ckalswo6312!',
   database: 'neighbor',
   multipleStatements: true
 })
@@ -61,6 +61,11 @@ router.post("/sign_in", async function(req,res,next){
         })
         req.session.name = dbName;
         req.session.email = body.email;
+        req.session.phone = result.dataValues.phone;
+        req.session.birth = result.dataValues.birth;
+        req.session.postcode = result.dataValues.postcode;
+        req.session.modifyAddress = result.dataValues.modifyAddress;
+        req.session.detailAddress = result.dataValues.detailAddress;
         res.redirect('/');
     }
     else{
@@ -126,7 +131,7 @@ router.post('/sign_up', function(req, res, next) {
 
 
 router.get('/mainBoard', function(req, res, next){
-  var sql = "select id, listName, name, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'";
+  var sql = "select id, listName, name, title, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'";
   client.query(sql, function (err, rows) {
     if (err) console.error(err);
         client.query("select count(*) as count from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'" , (countQueryErr, countQueryResult) => {
@@ -154,7 +159,7 @@ router.get('/list/:whe/:page',function(req,res,next)
 {
     var whe = req.params.whe;
     var page = req.params.page;
-    var sql = "select id, name, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '" + whe + "'";
+    var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '" + whe + "'";
     client.query(sql, function (err, rows) {
         if (err) console.error(err);
         client.query("select count(*) as count from texts where listName= '"+whe+"'" , (countQueryErr, countQueryResult) => {
@@ -189,10 +194,12 @@ router.get('/profile', function(req,res,next){
 router.post('/edt/:whe', function(req, res, next) {
   let body = req.body;
   let whe = req.params.whe;
+  let name = session.name;
 
   models.texts.create({
     listName: body.listName,
-      name: body.name,
+    name: name,
+      title: body.name,
       input: body.input
   })
       .then( result => {
@@ -242,7 +249,7 @@ router.get('/myPage', function(req, res, next){
 });
 
 router.get('/profile', function(req, res, next){
-  res.render('profile', { session: session });
+  res.render('profile', {rows: rows, session: session, data: data});
 });
 //프로필 변경 기능
 router.post('/profile', async function(req, res, next){

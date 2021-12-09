@@ -11,7 +11,6 @@
     <title>Neighbor</title>
 </head>
 <body>
-    
     <% include header %>
     <div id="wholeBoard">
         <div id="list">
@@ -34,7 +33,7 @@
                 <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
                     <span id="title">프로필 변경</span>
                 </nav>
-                <form method="post" action="" style="margin-top:20px;  margin-left: 50px;">
+                <form method="post" action="" style="margin-top:20px;  margin-left: 50px;"> 
                     <div>
                         닉네임 <span style="margin-left: 50px;"><%= session.name %> </span>
                     </div>
@@ -52,22 +51,22 @@
             
                     <div>
                         전화번호
-                        <input type="text" pattern="[0-9]{11,11}$" name="phone" class="phone" id="phone" placeholder="전화번호" onfocus="this.placeholder=''" onblur="this.placeholder='전화번호'" title="-없이 숫자 11자리를 입력하세요." required>
+                        <input type="text" pattern="[0-9]{11,11}$" name="phone" class="phone" id="phone" placeholder="전화번호" value="<%=session.phone%>" onfocus="this.placeholder=''" onblur="this.placeholder='전화번호'" title="-없이 숫자 11자리를 입력하세요." required>
                     </div>
                     <div>
                         생년월일
-                        <input type="date" id="birth" name="birth" placeholder="생년월일" onfocus="this.placeholder=''" onblur="this.placeholder='생년월일'" required>
+                        <input type="date" id="birth" name="birth" placeholder="생년월일" value="<%=session.birth%>" onfocus="this.placeholder=''" onblur="this.placeholder='생년월일'" required>
                     </div>
                     <div>
                         <ul class="add" id="newinfo">
                             <li>
                                 주소
-                                <input type="text" id="postcode1" name="postcode" placeholder="우편번호" autocomplete="off">
+                                <input type="text" id="postcode1" name="postcode" placeholder="우편번호" value="<%=session.postcode%>" autocomplete="off">
                                 <button class="address_button" name="address_button" type="button" onclick="execDaumPostcode()">주소 찾기</button>
                             </li>
-                            <li><input type="text" id="modifyAddress1" name="modifyAddress" placeholder="주소" autocomplete="off"><br></li>
+                            <li><input type="text" id="modifyAddress1" name="modifyAddress" placeholder="주소" value="<%=session.modifyAddress%>" autocomplete="off"><br></li>
                             <li>
-                                <input type="text" id="detailAddress1" name="detailAddress" placeholder="상세주소" autocomplete="off">
+                                <input type="text" id="detailAddress1" name="detailAddress" placeholder="상세주소" value="<%=session.detailAddress%>" autocomplete="off">
                                 <input type="text" id="extraAddress1" name="extraAddress" placeholder="참고항목" autocomplete="off">
                             </li>
                         </ul>
