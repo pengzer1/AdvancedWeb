@@ -13,11 +13,11 @@
 
         <div id="edit">
             
-            <form action="/editText" method="post" style="width: 1050px;">
+            <form action="/edt/<%=where%>" method="post" style="width: 1050px;">
                 <div name="listName" id="listName">
-                    낙서장
+                    <%=where%>
                 </div>
-                <input type="hidden" name="listName" value="낙서장">
+                <input type="hidden" name="listName" value="<%=where%>">
                 <div style="margin-top:30px; font-size: 25px; width:1050px">
                     제목
                 </div>

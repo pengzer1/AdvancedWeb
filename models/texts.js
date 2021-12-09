@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  var text = sequelize.define('text', {
+  var texts = sequelize.define('texts', {
     listName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -17,5 +17,5 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     }
   });
-  return text;
+  return texts;
 };

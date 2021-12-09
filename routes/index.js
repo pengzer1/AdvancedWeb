@@ -3,17 +3,14 @@ var router = express.Router();
 var mysql = require('mysql2');
 var models = require('../models');
 var crypto = require('crypto');
-<<<<<<< HEAD
 const { connect } = require('http2');
-=======
 var session = require('express-session');
->>>>>>> c4f7026cf3e1a165890379b6a31699479079add7
 
 var client = mysql.createConnection({
   host: 'localhost',
   port: '3306',
   user: 'root',
-  password: 'ckalswo6312!',
+  password: '1234',
   database: 'neighbor',
   multipleStatements: true
 })
@@ -134,10 +131,37 @@ router.post('/sign_up', function(req, res, next) {
 router.get('/mainBoard', function(req, res, next){
   res.render('mainBoard');
 });
-router.get('/seoulList', function(req, res, next){
-  res.render('seoulList');
+router.get('/mainBoard', function(req, res, next){
+  res.render('mainBoard');
 });
 
+//글 상세보기
+router.get('/textForm/:whe/:id',function(req,res,next)
+{
+var id = req.params.id;
+var whe = req.params.whe;
+    var sql = "select id, name, input from texts where id=?";
+    client.query(sql,[id], function(err,row)
+    {
+        if(err) console.error(err);
+        res.render('textForm', {row:row[0], where:whe});
+    });
+});
+//페이징
+router.get('/list/:whe/:page',function(req,res,next)
+{
+    var whe = req.params.whe;
+    var page = req.params.page;
+    var sql = "select id, name, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '" + whe + "'";
+    client.query(sql, function (err, rows) {
+        if (err) console.error(err);
+        client.query("select count(*) as count from texts where listName= '"+whe+"'" , (countQueryErr, countQueryResult) => {
+          if (countQueryErr) console.error("err : " + countQueryErr);
+          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe});
+        });
+        
+    });
+});
 
 router.get('/textForm', function(req, res, next){
   res.render('textForm');
@@ -148,22 +172,33 @@ router.get('/map', function(req, res, next){
 router.get('/chat', function(req, res, next){
   res.render('chat');
 });
-router.get('/editText', function(req, res, next){
-  res.render('editText');
+//editText
+router.get('/editText/:whe', function(req, res, next){
+  let whe = req.params.whe;
+  res.render('editText', {where: whe});
 });
-
+router.get('/myPage', function(req,res,next){
+  res.render('myPage');
+});
+router.get('/delId', function(req,res,next){
+  res.render('delId');
+});
+router.get('/profile', function(req,res,next){
+  res.render('profile');
+});
 //editText Post 부분
-router.post('/editText', function(req, res, next) {
+router.post('/edt/:whe', function(req, res, next) {
   let body = req.body;
+  let whe = req.params.whe;
 
-  models.text.create({
+  models.texts.create({
     listName: body.listName,
       name: body.name,
       input: body.input
   })
       .then( result => {
           console.log("데이터 추가 완료");
-          res.redirect("/seoulList");
+          res.redirect("/list/"+whe+"/1");
       })
       .catch( err => {
           console.log("데이터 추가 실패");

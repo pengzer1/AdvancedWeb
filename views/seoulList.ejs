@@ -21,15 +21,15 @@
                 </li>
                 <li>
                     <ul class="child">
-                        <li><a href="/seoulList">ㄴ서울</a></li>
-                        <li><a href="/seoulList">ㄴ경기</a></li>
-                        <li><a href="/seoulList">ㄴ강원</a></li>
-                        <li><a href="/seoulList">ㄴ충북</a></li>
-                        <li><a href="/seoulList">ㄴ충남</a></li>
-                        <li><a href="/seoulList">ㄴ전북</a></li>
-                        <li><a href="/seoulList">ㄴ전남</a></li>
-                        <li><a href="/seoulList">ㄴ경북</a></li>
-                        <li style="margin-bottom: 10px;"><a href="/seoulList">ㄴ경남</a></li>
+                        <li><a href="/list/서울/1">ㄴ서울</a></li>
+                        <li><a href="/list/경기/1">ㄴ경기</a></li>
+                        <li><a href="/list/강원/1">ㄴ강원</a></li>
+                        <li><a href="/list/충북/1">ㄴ충북</a></li>
+                        <li><a href="/list/충남/1">ㄴ충남</a></li>
+                        <li><a href="/list/전북/1">ㄴ전북</a></li>
+                        <li><a href="/list/전남/1">ㄴ전남</a></li>
+                        <li><a href="/list/경북/1">ㄴ경북</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/list/경남/1">ㄴ경남</a></li>
                     </ul>
                 </li>
                 <li class="listTitle">
@@ -37,10 +37,10 @@
                 </li>
                 <li>
                     <ul class="child">
-                        <li><a href="/seoulList">ㄴ취미/소모임</a></li>
-                        <li><a href="/seoulList">ㄴ낙서장</a></li>
-                        <li><a href="/seoulList">ㄴ핫추</a></li>
-                        <li><a href="/seoulList">ㄴ고민 상담소</a></li>
+                        <li><a href="/list/취미/1">ㄴ취미/소모임</a></li>
+                        <li><a href="/list/낙서장/1">ㄴ낙서장</a></li>
+                        <li><a href="/list/핫추/1">ㄴ핫추</a></li>
+                        <li><a href="/list/고민상담소/1">ㄴ고민 상담소</a></li>
                     </ul>
                 </li>
             </ul>
@@ -48,7 +48,7 @@
         <div class="showBoard">
             <div class="test" id="event">
                 <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
-                    <span id="title">서울 게시판</span>
+                    <span id="title"><%=where%></span>
                 </nav>
                 <ul class="boardList">
                    <li>
@@ -58,20 +58,37 @@
                             <li style="margin-left:69px; margin-right:45px; line-height: 30px;">댓글</li>
                         </ul>
                    </li>
-                    <% for(let texts of text){ %>
-                        <li>
-                            <div class="name"><a href="/textForm"><%= texts.name %></a></div>
-                            <div class="date"><%= texts.createdAt %></div>
-                            <div class="comment">댓글</div>
-                        </li>
-                        
-                    <% } %>
-                    <li>
-                        <button id ="goInput" onclick="location.href='/editText'">글쓰기</button>
-                    </li>
+                   
+               
+                   <%
+                   if(length == 0){
+
+                   }else{
+                   for(var i = (length-1) - ((page-1) * page_num); i > (length-1) - (page * page_num); i--) {
+                   if(i < 0){
+                       i--;
+                   }else{
+                       var data = rows[i]
+                   %>
+                   <li>
+                        <div class="name"><a href="/textForm/<%=where%>/<%=data.id%>"><%=data.name%></a></div>
+                        <div class="date"><%=data.createdAt%></div>
+                        <div class="comment">댓글</div>
+                   </li>
+                   <% }
+                   }
+                }
+                   %>
                 </ul>
+                <div> <button id ="goInput" onclick="location.href='/editText/<%=where%>'">글쓰기</button> </div>
                 <div class="paging">
-                    paging 들어갈 부분
+                    <%
+                    for(var j = 0; j < rows.length / page_num; j++){
+                    %>
+                    [<a href="<%= j + 1 %>"><%= j + 1 %></a>]
+                    <%
+                    }
+                    %>
                 </div>
                 <div id="search">
                     <form action="" method="post">
@@ -92,5 +109,4 @@
     <% include footer %>
     
 </body>
-<% include paging %>
 </html>
