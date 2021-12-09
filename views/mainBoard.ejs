@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/mainBoard.css">
     <title>Neighbor</title>
 </head>
+<% var count = 0 %>
 <body>
     
     <% include header %>
@@ -54,28 +55,17 @@
                 </div>
                 <div id="pre">
                     <ul class="boardList">
-                        <li>
-                            <a href="/textForm">111</a>
-                            <span style="margin-left: 300px;">작성일</span>
-                        </li>
-                        <li>
-                            <a href="/textForm">222</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">333</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">444</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">555</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">666</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">777</a>
-                        </li>
+                        <% for(var i = length-1; i >= 0; i--){ %>
+                            <% if(rows[i].listName == '취미'){ %>
+                            <li>
+                                <a href="/textForm/<%=rows[i].listName%>/<%=rows[i].id%>"><%=rows[i].name%></a>
+                                <span"><%=rows[i].createdAt%></span>
+                            </li>
+                            <%count++;}
+                            if(count >8){
+                                break;
+                            }
+                            }count = 0;%>
                     </ul>
                 </div>
             </div>
@@ -88,27 +78,17 @@
                 </div>
                 <div id="pre">
                     <ul class="boardList">
-                        <li>
-                            <a href="/textForm">111</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">222</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">333</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">444</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">555</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">666</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">777</a>
-                        </li>
+                        <% for(var i = length-1; i >= 0; i--){ %>
+                            <% if(rows[i].listName == '낙서장'){ %>
+                            <li>
+                                <a href="/textForm/<%=rows[i].listName%>/<%=rows[i].id%>"><%=rows[i].name%></a>
+                                <span"><%=rows[i].createdAt%></span>
+                            </li>
+                            <%count++;}
+                            if(count >8){
+                                break;
+                            }
+                            }count = 0;%>
                     </ul>
                 </div>
             </div>
@@ -121,27 +101,17 @@
                 </div>
                 <div id="pre">
                     <ul class="boardList">
-                        <li>
-                            <a href="/textForm">111</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">222</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">333</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">444</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">555</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">666</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">777</a>
-                        </li>
+                        <% for(var i = length-1; i >= 0; i--){ %>
+                            <% if(rows[i].listName == '핫추'){ %>
+                            <li>
+                                <a href="/textForm/<%=rows[i].listName%>/<%=rows[i].id%>"><%=rows[i].name%></a>
+                                <span"><%=rows[i].createdAt%></span>
+                            </li>
+                            <%count++;}
+                            if(count >8){
+                                break;
+                            }
+                            }count = 0;%>
                     </ul>
                 </div>
             </div>
@@ -154,27 +124,17 @@
                 </div>
                 <div id="pre">
                     <ul class="boardList">
-                        <li>
-                            <a href="/textForm">제가 좋아하는 사람이 있는데 어떡할까요</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">222</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">333</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">444</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">555</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">666</a>
-                        </li>
-                        <li>
-                            <a href="/textForm">777</a>
-                        </li>
+                        <% for(var i = length-1; i >= 0; i--){ %>
+                            <% if(rows[i].listName == '고민상담소'){ %>
+                            <li>
+                                <a href="/textForm/<%=rows[i].listName%>/<%=rows[i].id%>"><%=rows[i].name%></a>
+                                <span"><%=rows[i].createdAt%></span>
+                            </li>
+                            <%count++;}
+                            if(count >8){
+                                break;
+                            }
+                            }count = 0;%>
                     </ul>
                 </div>
             </div>

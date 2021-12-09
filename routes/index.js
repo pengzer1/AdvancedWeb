@@ -131,10 +131,15 @@ router.post('/sign_up', function(req, res, next) {
 
 
 router.get('/mainBoard', function(req, res, next){
-  res.render('mainBoard', { session: session });
-});
-router.get('/mainBoard', function(req, res, next){
-  res.render('mainBoard');
+  var sql = "select id, listName, name, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'";
+  client.query(sql, function (err, rows) {
+    if (err) console.error(err);
+        client.query("select count(*) as count from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'" , (countQueryErr, countQueryResult) => {
+          if (countQueryErr) console.error("err : " + countQueryErr);
+          res.render('mainBoard', {rows: rows, length:countQueryResult[0].count, session:session});
+        });
+  });
+        
 });
 
 //글 상세보기
@@ -146,7 +151,7 @@ var whe = req.params.whe;
     client.query(sql,[id], function(err,row)
     {
         if(err) console.error(err);
-        res.render('textForm', {row:row[0], where:whe});
+        res.render('textForm', {row:row[0], where:whe, session:session});
   });
 });
 //페이징
