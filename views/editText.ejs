@@ -12,7 +12,27 @@
     <div id="editOutter">
 
         <div id="edit">
-            
+            <% if (row.id > -1) { %> 
+                <form action="/mod/<%=where%>" method="post" style="width: 1050px;">
+                    <div name="listName" id="listName">
+                        <%=where%>
+                    </div>
+                    <input type="hidden" name="listName" value="<%=where%>">
+                    <input type="hidden" name="id" value="<%=row.id%>">
+                    <div style="margin-top:30px; font-size: 25px; width:1050px">
+                        제목
+                    </div>
+                    <input name="title" type="text" value="<%= row.title %> " style="width: 1055px; height: 30px; font-size: 25px;">
+                    <div style="margin-top:30px; font-size: 25px; width:1050px">
+                        글쓰기
+                    </div>
+                    <textarea id="input" name="input" rows="10" cols="100" placeholder="여기에 작성하세요" style="font-size: 20px;"><%= row.input %></textarea>
+                    <div id="btnDiv">
+                        <button type="submit" class="Btn">수정</button>
+                        <button type="button" class="Btn" onclick='back()'">취소</button>
+                    </div>
+                </form>
+            <% } else { %>
             <form action="/edt/<%=where%>" method="post" style="width: 1050px;">
                 <div name="listName" id="listName">
                     <%=where%>
@@ -21,7 +41,7 @@
                 <div style="margin-top:30px; font-size: 25px; width:1050px">
                     제목
                 </div>
-                <input name="name" type="text" style="width: 1055px; height: 30px; font-size: 25px;">
+                <input name="title" type="text" style="width: 1055px; height: 30px; font-size: 25px;">
                 <div style="margin-top:30px; font-size: 25px; width:1050px">
                     글쓰기
                 </div><textarea id="input" name="input" rows="10" cols="100" placeholder="여기에 작성하세요" style="font-size: 20px;"></textarea>
@@ -30,6 +50,7 @@
                     <button type="button" class="Btn" onclick='back()'">취소</button>
                 </div>
             </form>
+            <% } %>
         </div>
     </div>
 

@@ -1,133 +1,131 @@
+/* header*/
 
-  /* header*/
-  
-  * {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-    text-decoration: none;
-    color: black;
-    outline: none;
-  }
-  
-  .signBar {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    background-color: #a9f5e1;
-    height: 40px;
-  }
-  
-  .logo {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-  }
-  
-  .top {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 13px;
-  }
-  .top a {
-    color: #088a85;
-    font-size: 15px;
-    outline: none;
-  }
-  .top li {
-    padding: 0px 20px;
-  }
-  
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+
+.signBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #a9f5e1;
+  height: 40px;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.top a {
+  color: #088a85;
+  font-size: 15px;
+  outline: none;
+}
+.top li {
+  padding: 0px 20px;
+}
+
 /*body*/
-#editOutter{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top:40px;
+#editOutter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
-#listDiv{
-    width:1050px;
-    border: 1px solid #ebebea;
-    word-break: break-all;
-    border-radius: 20px;
+#listDiv {
+  width: 1050px;
+  border: 1px solid #ebebea;
+  word-break: break-all;
+  border-radius: 20px;
 }
-#listName{
-    font-size: 30px;
-    border-bottom: 1px solid #ebebea;
+#listName {
+  font-size: 30px;
+  border-bottom: 1px solid #ebebea;
 }
-#edit{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-#listDiv a:hover{
-    text-decoration: underline;
+#listDiv a:hover {
+  text-decoration: underline;
 }
-.tit{
-    width:100px;
-    height: 50px;
-    font-size: 25px;
+.tit {
+  margin-top: 30px;
+  font-size: 25px;
+  width: 800px;
 }
-#who{
-    font-size: 13px;
-    margin-top: 5px;
-    border-bottom: 1px solid #ebebeb;
-    width: 1000px;
+#who {
+  font-size: 13px;
+  margin-top: 5px;
+  border-bottom: 1px solid #ebebeb;
+  width: 1000px;
 }
-#comment{
-    width: 1000px;
-    font-size: 25px;
+#comment {
+  width: 1000px;
+  font-size: 25px;
 }
-#dat{
-    margin-bottom: 50px;
+#dat {
+  margin-bottom: 50px;
 }
-#comDiv{
-    border-bottom: 2px solid #ebebeb;
-    margin-top: 15px;
-    font-size: 14px;
+#comDiv {
+  border-bottom: 2px solid #ebebeb;
+  margin-top: 15px;
+  font-size: 14px;
 }
-#addComment{
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #a9f5e1;
-    margin-top: 20px;
+#addComment {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #a9f5e1;
+  margin-top: 20px;
 }
-textarea{
-    width: 900px;
-    height: 50px;
-    resize: none;
-    border: none;
+textarea {
+  width: 900px;
+  height: 50px;
+  resize: none;
+  border: none;
 }
 
-button{
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid skyblue;
-    cursor: pointer;
-    color: white;
-    background-color: skyblue;
-    padding: 5px;
-    margin-left: 850px;
+button {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid skyblue;
+  cursor: pointer;
+  color: white;
+  background-color: skyblue;
+  padding: 5px;
+  margin-left: 850px;
+}
+
+/*footer*/
+.others {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  height: 200px;
+  border-top: 1px solid black;
+}
+
+/*너비 줄어들면 어느순간 고정*/
+@media screen and (max-width: 1100px) {
+  html {
+    width: 1100px;
   }
-  
-  /*footer*/
-  .others {
-    display: flex;
-    justify-content: center;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 50px;
-    height: 200px;
-    border-top: 1px solid black;
-  }
-  
-  /*너비 줄어들면 어느순간 고정*/
-  @media screen and (max-width: 1100px) {
-    html {
-      width: 1100px;
-    }
-  }
-  
+}

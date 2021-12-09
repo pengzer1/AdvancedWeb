@@ -3,6 +3,8 @@ var router = express.Router();
 var mysql = require('mysql2');
 var models = require('../models');
 var crypto = require('crypto');
+var sequelize = require('sequelize');
+var Op = sequelize.Op;
 
 var client = mysql.createConnection({
   host: 'localhost',
@@ -153,10 +155,42 @@ var whe = req.params.whe;
       if(err) console.error(err);
         client.query("select * from cmts where textId='"+id+"'", function(selErr, selRes){
           if(selErr) console.error(selErr);
-            res.render('textForm', {row:row[0], session:session, cmt:selRes, where:whe});
+            res.render('textForm', {row:row[0], session:session, cmt:selRes, where:whe, id:id});
         });
   });
 });
+//Text 수정 이동
+router.get('/editText/:whe/:id/modify', function(req,res,next) {
+  var id = req.params.id;
+  var whe = req.params.whe;
+
+  var sql = "select id, name, title, input from texts where id=?";
+  client.query(sql, [id], function(err,row) {
+    if(err) console.error(err);
+    res.render('editText', {row:row[0], where: whe, session: session, id: id});
+  });
+});
+//Text 삭제 기능
+router.post('/delText', async function(req, res, next) {
+  let body = req.body;
+
+  let result = await models.texts.findAll({
+    where: {
+      name: session.name
+    }
+  });
+
+  if(result === null){
+    console.log("없음");
+  }
+  else{
+    console.log("있음");
+
+    models.texts.destroy({where: { name: session.name, title: body.title, input: body.input}});
+    res.redirect("/list/"+ body.whe + "/1");
+  }
+});
+
 //페이징
 router.get('/list/:whe/:page',function(req,res,next)
 {
@@ -167,9 +201,26 @@ router.get('/list/:whe/:page',function(req,res,next)
         if (err) console.error(err);
         client.query("select count(*) as count from texts where listName= '"+whe+"'" , (countQueryErr, countQueryResult) => {
           if (countQueryErr) console.error("err : " + countQueryErr);
-          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session});
+          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: false});
         });
         
+    });
+});
+//검색
+router.post('/list/:whe/search/:page', function(req,res,next){
+  let body = req.body;
+  let whe = req.params.whe;
+  let page = req.params.page;
+  let searchWord = body.searchWord;
+  let searchRange = body.searchRange;
+
+    var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where "+ searchRange +" LIKE '%" + searchWord + "%' AND listName = '" + whe + "'";
+    client.query(sql, function (err, rows) {
+      if(err) console.error(err);
+      client.query("select count(*) as count from texts where "+ searchRange +" LIKE '%"+searchWord+"%' AND listName = '" + whe + "'", (countQueryErr, countQueryResult) => {
+        if(countQueryErr) console.error("err : " + countQueryErr);
+        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true});
+      });
     });
 });
 
@@ -182,7 +233,8 @@ router.get('/chat', function(req, res, next){
 //editText
 router.get('/editText/:whe', function(req, res, next){
   let whe = req.params.whe;
-  res.render('editText', {where: whe, session:session});
+  let row = -1;
+  res.render('editText', {where: whe, row:row, session:session});
 });
 //마이페이지 내가 쓴 글
 router.get('/myPage/:page', function(req,res,next){
@@ -203,6 +255,17 @@ router.get('/delId', function(req,res,next){
 router.get('/profile', function(req,res,next){
   res.render('profile', {session:session});
 });
+//editText 수정 Post 부분
+router.post('/mod/:whe', function(req, res, next) {
+  let body = req.body;
+  let whe = req.params.whe;
+
+  models.texts.update({
+    title: body.title,
+    input: body.input,
+  }, {where: {id: body.id}});
+  res.redirect("/list/"+whe+"/1");
+});
 //editText Post 부분
 router.post('/edt/:whe', function(req, res, next) {
   let body = req.body;
@@ -212,7 +275,7 @@ router.post('/edt/:whe', function(req, res, next) {
   models.texts.create({
     listName: body.listName,
     name: name,
-      title: body.name,
+      title: body.title,
       input: body.input
   })
       .then( result => {
