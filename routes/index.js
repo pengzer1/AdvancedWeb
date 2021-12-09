@@ -230,7 +230,7 @@ router.post('/pwConfirm', async function(req, res, next){
     }
     else{
       console.log("비밀번호 불일치");
-      res.redirect("/delId");
+      res.redirect("/pwConfirm");
     }
   }
 });
