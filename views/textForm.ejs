@@ -46,20 +46,23 @@
             <% if(cmt.length == 0){}
             else{ 
                 for(var i = 0; i < cmt.length; i++){ %>
-                    
-                    <div id="comDiv">
-                        <span><%=cmt[i].name%></span>
+                    <form action="/deleteCmt/<%=where%>/<%=row.id%>" method="post">
+                        <input type="hidden" name="id" value="<%=cmt[i].id%>">
+                        <div id="comDiv">
+                        <span><%=cmt[i].name%><input type="hidden" name="name" value="<%=cmt[i].name%>">
+                            <% if(session.name===cmt[i].name){%><button type="submit">삭제</button><%}%>
+                            </span>
                         <p>
-                            <%=cmt[i].content%>
+                            <%=cmt[i].content%><input type="hidden" name="content" value="<%=cmt[i].content%>">
                         </p>
                     </div>
-                
+                    </form>
                 <% } 
-            }%>
+        }%>
         </div>
         <form action="/createCmt/<%=where%>/<%=row.id%>" method="post" id="addComment">
-            <span><%=row.name%></span>
-            <input type="hidden" name="nickName" value="<%=row.name%>">
+            <span><%=session.name%></span>
+            <input type="hidden" name="nickName" value="<%=session.name%>">
             <textarea name="content" placeholder="댓글을 남겨보세요."></textarea>
             <button type="submit" style=" width:50px;"> 등록</button>
         </form>

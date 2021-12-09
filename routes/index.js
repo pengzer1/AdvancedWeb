@@ -303,6 +303,20 @@ router.post('/createCmt/:whe/:id', function(req, res, next){
     console.log("댓글 추가 실패");
   })
 });
+//댓글 삭제
+router.post('/deleteCmt/:whe/:id', async function(req,res,next){
+  let where = req.params.whe;
+  let id = req.params.id;
+  let body = req.body;
+
+  let result = await models.cmts.findOne({ where: { id: body.id, textId: id, name: body.name, content: body.content }});
+  if(result === null) console.log("값 없음");
+  else{
+    console.log("값 있음");
+    models.cmts.destroy({ where: { id: body.id, textId: id, name: body.name, content: body.content }});
+    res.redirect('/textForm/' + where + '/' + id);
+  }
+});
 
 router.get('/pwConfirm', function(req, res, next){
   res.render('pwConfirm', { session: session });
