@@ -61,9 +61,8 @@
                    
                
                    <%
-                   if(length == 0){
-
-                   }else{
+                   if(length == 0){}
+                   else{
                    for(var i = (length-1) - ((page-1) * page_num); i > (length-1) - (page * page_num); i--) {
                    if(i < 0){
                        i--;
@@ -104,9 +103,7 @@
             </div>
         </div>
     </div>
-
     
     <% include footer %>
-    
 </body>
 </html>

@@ -8,7 +8,7 @@ var client = mysql.createConnection({
   host: 'localhost',
   port: '3306',
   user: 'root',
-  password: '1234',
+  password: 'ckalswo6312!',
   database: 'neighbor',
   multipleStatements: true
 })
@@ -61,6 +61,11 @@ router.post("/sign_in", async function(req,res,next){
         })
         req.session.name = dbName;
         req.session.email = body.email;
+        req.session.phone = result.dataValues.phone;
+        req.session.birth = result.dataValues.birth;
+        req.session.postcode = result.dataValues.postcode;
+        req.session.modifyAddress = result.dataValues.modifyAddress;
+        req.session.detailAddress = result.dataValues.detailAddress;
         res.redirect('/');
     }
     else{
@@ -240,7 +245,7 @@ router.get('/myPage', function(req, res, next){
 });
 
 router.get('/profile', function(req, res, next){
-  res.render('profile', { session: session });
+  res.render('profile', {rows: rows, session: session, data: data});
 });
 //프로필 변경 기능
 router.post('/profile', async function(req, res, next){
