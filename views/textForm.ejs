@@ -15,34 +15,41 @@
     <div id="editOutter">
         <div id="listDiv">
             <div id="listName">
-                <a href="/seoulList"><%=where%></a>
+                <a href="/list/<%=where%>/1"><%=where%></a>
             </div>
             <div id="edit">
                 
-                <div style="width: 1050px; padding-left:50px;">
-                    <div class="tit">
+                <div style="width: 1000px;">
+                    <span class="tit">
                         <%=row.title%>
-                    </div>
+                    </span>
                     <div id="who">
                         작성자: <a href="#"><%=row.name%>></a>
                     </div>
-                    <div style="width:1050px; height: 500px; margin-top: 30px;">
-                        <%=row.input%>
-                    </div>
+                    <div style="width:1000px; height: 500px; margin-top: 30px;"><%=row.input%></div>
                 </div>
             </div>
         </div>
         <div id="comment">
             <span id="dat">댓글</span>
-            <% for(var i = 0; i < 3; i++){ %>
-                        
-                <% include comment %>
-            
-            <% } %>
+            <% if(cmt.length == 0){}
+            else{ 
+                for(var i = 0; i < cmt.length; i++){ %>
+                    
+                    <div id="comDiv">
+                        <span><%=cmt[i].name%></span>
+                        <p>
+                            <%=cmt[i].content%>
+                        </p>
+                    </div>
+                
+                <% } 
+            }%>
         </div>
-        <form action="#" method="post" id="addComment">
-            <span>내 닉네임</span>
-            <textarea placeholder="댓글을 남겨보세요."></textarea>
+        <form action="/createCmt/<%=where%>/<%=row.id%>" method="post" id="addComment">
+            <span><%=row.name%></span>
+            <input type="hidden" name="nickName" value="<%=row.name%>">
+            <textarea name="content" placeholder="댓글을 남겨보세요."></textarea>
             <button type="submit" style=" width:50px;"> 등록</button>
         </form>
     </div>

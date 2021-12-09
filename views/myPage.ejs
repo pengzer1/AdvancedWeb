@@ -35,19 +35,40 @@
                 <ul class="boardList">
                    <li>
                         <ul id="attribute">
-                            <li style="margin-left:282px; line-height: 30px;">제목</li>
-                            <li style="margin-left:320px; line-height: 30px;">작성일</li>
-                            <li style="margin-left:69px; margin-right:45px; line-height: 30px;">댓글</li>
+                            <li style="margin-left:230px; line-height: 30px;">제목</li>
+                            <li style="margin-left:260px; line-height: 30px;">작성자</li>
+                            <li style="margin-left:80px; line-height: 30px;">작성일</li>
+                            <li style="margin-left:78px; margin-right:45px; line-height: 30px;">댓글</li>
                         </ul>
                     </li>
-                    <% for(var i = 0; i < 8; i++){ %>
-                        
-                        <% include listForm %>
-                    
-                    <% } %>
+                    <%
+                   if(length == 0){}
+                   else{
+                   for(var i = (length-1) - ((page-1) * page_num); i > (length-1) - (page * page_num); i--) {
+                   if(i < 0){
+                       i--;
+                   }else{
+                       var data = rows[i]
+                   %>
+                   <li>
+                        <div class="name"><a href="/textForm/<%=data.listName%>/<%=data.id%>"><%=data.title%></a></div>
+                        <div class="who"><%=data.name%></div>
+                        <div class="date"><%=data.createdAt%></div>
+                        <div class="comment">댓글</div>
+                   </li>
+                   <% }
+                   }
+                }
+                   %>
                 </ul>
                 <div class="paging">
-                    paging 들어갈 부분
+                    <%
+                    for(var j = 0; j < rows.length / page_num; j++){
+                    %>
+                    [<a href="<%= j + 1 %>"><%= j + 1 %></a>]
+                    <%
+                    }
+                    %>
                 </div>
             </div>
         </div>
@@ -56,5 +77,4 @@
     
 <% include footer %>
 </body>
-<% include paging %>
 </html>

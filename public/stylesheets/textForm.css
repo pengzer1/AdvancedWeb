@@ -49,6 +49,7 @@
 #listDiv{
     width:1050px;
     border: 1px solid #ebebea;
+    word-break: break-all;
     border-radius: 20px;
 }
 #listName{
@@ -65,7 +66,8 @@
     text-decoration: underline;
 }
 .tit{
-    margin-top: 30px;
+    width:100px;
+    height: 50px;
     font-size: 25px;
 }
 #who{

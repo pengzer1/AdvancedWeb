@@ -143,6 +143,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+#pre .boardList li span{
+  width:90px;
+  text-align: right;
+}
 #pre .boardList li a:hover{
   text-decoration: underline;
   cursor:pointer;

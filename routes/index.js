@@ -150,8 +150,11 @@ var whe = req.params.whe;
     var sql = "select id, name, title, input from texts where id=?";
     client.query(sql,[id], function(err,row)
     {
-        if(err) console.error(err);
-        res.render('textForm', {row:row[0], where:whe, session:session});
+      if(err) console.error(err);
+        client.query("select * from cmts where textId='"+id+"'", function(selErr, selRes){
+          if(selErr) console.error(selErr);
+            res.render('textForm', {row:row[0], session:session, cmt:selRes, where:whe});
+        });
   });
 });
 //페이징
@@ -181,8 +184,18 @@ router.get('/editText/:whe', function(req, res, next){
   let whe = req.params.whe;
   res.render('editText', {where: whe, session:session});
 });
-router.get('/myPage', function(req,res,next){
-  res.render('myPage', {session:session});
+//마이페이지 내가 쓴 글
+router.get('/myPage/:page', function(req,res,next){
+    var page = req.params.page;
+    var sql = "select id, name, title, listName, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where name = '" + session.name + "'";
+    client.query(sql, function (err, rows) {
+        if (err) console.error(err);
+        client.query("select count(*) as count from texts where name= '"+session.name+"'" , (countQueryErr, countQueryResult) => {
+          if (countQueryErr) console.error("err : " + countQueryErr);
+          res.render('myPage', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, session:session});
+        });
+        
+    });
 });
 router.get('/delId', function(req,res,next){
   res.render('delId', {session:session});
@@ -210,6 +223,23 @@ router.post('/edt/:whe', function(req, res, next) {
           console.log("데이터 추가 실패");
       })
 });
+//댓글 달기
+router.post('/createCmt/:whe/:id', function(req, res, next){
+  let where = req.params.whe;
+  let id = req.params.id;
+  let body = req.body;
+  models.cmts.create({
+    textId: id,
+    name: body.nickName,
+    content: body.content
+  }).then( result =>{
+    console.log("댓글 추가 완료");
+    res.redirect("/textForm/"+where+"/"+id);
+  })
+  .catch( err => {
+    console.log("댓글 추가 실패");
+  })
+});
 
 router.get('/pwConfirm', function(req, res, next){
   res.render('pwConfirm', { session: session });
@@ -235,17 +265,13 @@ router.post('/pwConfirm', async function(req, res, next){
 
     if(dbPassword === hashPassword){
       console.log("비밀번호 일치");
-      res.redirect("/myPage");
+      res.redirect("/myPage/1");
     }
     else{
       console.log("비밀번호 불일치");
       res.redirect("/pwConfirm");
     }
   }
-});
-
-router.get('/myPage', function(req, res, next){
-  res.render('myPage', { session: session });
 });
 
 router.get('/profile', function(req, res, next){
