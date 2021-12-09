@@ -142,7 +142,7 @@ router.get('/textForm/:whe/:id',function(req,res,next)
 {
 var id = req.params.id;
 var whe = req.params.whe;
-    var sql = "select id, name, input from texts where id=?";
+    var sql = "select id, name, title, input from texts where id=?";
     client.query(sql,[id], function(err,row)
     {
         if(err) console.error(err);
@@ -165,9 +165,6 @@ router.get('/list/:whe/:page',function(req,res,next)
     });
 });
 
-router.get('/textForm', function(req, res, next){
-  res.render('textForm', { session: session });
-});
 router.get('/map', function(req, res, next){
   res.render('map', { session: session });
 });
