@@ -175,13 +175,13 @@ router.get('/editText/:whe', function(req, res, next){
   res.render('editText', {where: whe, session:session});
 });
 router.get('/myPage', function(req,res,next){
-  res.render('myPage');
+  res.render('myPage', {session:session});
 });
 router.get('/delId', function(req,res,next){
-  res.render('delId');
+  res.render('delId', {session:session});
 });
 router.get('/profile', function(req,res,next){
-  res.render('profile');
+  res.render('profile', {session:session});
 });
 //editText Post 부분
 router.post('/edt/:whe', function(req, res, next) {
@@ -226,11 +226,11 @@ router.post('/pwConfirm', async function(req, res, next){
 
     if(dbPassword === hashPassword){
       console.log("비밀번호 일치");
-      res.render('myPage',{session: session});
+      res.redirect("/myPage");
     }
     else{
       console.log("비밀번호 불일치");
-      res.redirect("/delId");
+      res.redirect("/pwConfirm");
     }
   }
 });
