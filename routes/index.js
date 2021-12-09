@@ -281,7 +281,8 @@ router.post('/mod/:whe', function(req, res, next) {
     title: body.title,
     input: body.input,
   }, {where: {id: body.id}});
-  res.redirect("/list/"+whe+"/1");
+  res.redirect("/textForm/"+whe+"/"+body.id);
+  next();
 });
 //editText Post 부분
 router.post('/edt/:whe', function(req, res, next) {
