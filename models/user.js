@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    intro: {
+      type: DataTypes.STRING
+    },
     detailAddress: {
       type: DataTypes.STRING,
       allowNull: false,

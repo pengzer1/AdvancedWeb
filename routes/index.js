@@ -494,7 +494,7 @@ router.post('/profile', upload.single('image'),async function(req, res, next){
       let salt = result.dataValues.salt;
       let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
 
-      models.user.update({image: image, pw: hashPassword, phone: body.phone, birth: body.birth, postcode: body.postcode, modifyAddress: body.modifyAddress, detailAddress: body.detailAddress},{where : { email: session.email }});
+      models.user.update({image: image, pw: hashPassword, phone: body.phone, birth: body.birth, postcode: body.postcode, modifyAddress: body.modifyAddress, detailAddress: body.detailAddress, intro:body.intro},{where : { email: session.email }});
 
       res.redirect('/');
     }
