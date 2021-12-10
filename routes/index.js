@@ -496,7 +496,22 @@ router.post('/profile', upload.single('image'),async function(req, res, next){
 
       models.user.update({image: image, pw: hashPassword, phone: body.phone, birth: body.birth, postcode: body.postcode, modifyAddress: body.modifyAddress, detailAddress: body.detailAddress, intro:body.intro},{where : { email: session.email }});
 
-      res.redirect('/');
+      if (req.session.email) {
+        console.log('로그아웃 처리');
+        req.session.destroy(
+            function (err) {
+                if (err) {
+                    console.log('세션 삭제시 에러');
+                    return;
+                }
+                console.log('세션 삭제 성공');
+                res.clearCookie('sid');
+                //파일 지정시 제일 앞에 / 를 붙여야 root 즉 public 안에서부터 찾게 된다
+                res.redirect('/');
+            }
+        );          //세션정보 삭제
+
+    }
     }
 });
 
