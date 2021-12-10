@@ -74,7 +74,13 @@
                         <div class="name"><a href="/textForm/<%=where%>/<%=data.id%>"><%=data.title%></a></div>
                         <div class="who">
                             <!--버튼 토글-->
-                            <button id="tog<%=i%>" value="unvis" 
+                            <%if(data.name == session.name){%>
+                            <button id="tog<%=i%>" value="unvis"
+                                style="width: 110px; border: 0; outline: 0; font-size: 15px; background-color: white;">
+                                <%=data.name%>
+                            </button>
+                            <%}else{%>
+                            <button id="tog<%=i%>" value="unvis"
                                 onclick="
                                 if(this.value == 'unvis'){
                                     this.nextSibling.nextSibling.style.display='block';
@@ -87,8 +93,9 @@
                                 style="width: 110px; border: 0; outline: 0; font-size: 15px; background-color: white; cursor: pointer;">
                                 <%=data.name%>
                             </button>
+                            <%}%>
                             <ul id="1">
-                                <li id="2"><a href="/smsPopup/<%=data.name%>">쪽지 보내기</a></li>
+                                <li id="2"><a href="/smsPopup/<%=where%>/<%=data.name%>">쪽지 보내기</a></li>
                             </ul>
                         </div>
                         <div class="date"><%=data.createdAt%></div>

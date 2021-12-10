@@ -21,9 +21,10 @@
                 <div>유저 없음</div>
                 <% } else { 
                     for(var i = 0; i < length && i < 8; i++) {%>
-                <a><div><div class="item_div"><img src="<%= rows[i].image %>"><div class="text_div"><%=rows[i].name%></div>
+                <a><div><div class="item_div"><img src="<%= rows[i].image %>"><div class="text_div"><button><%=rows[i].name%></button></div>
                     <ul>
                         <li><div class="text_div"><%=rows[i].birth%></div></li>
+                        <li><div class="text_div"><%=rows[i].intro%></div></li>
                     </ul>
                     </div></div></a>
                 <% } } %>
@@ -31,6 +32,5 @@
         </div>
 
  <% include footer %>
-    <script async src="index.js"></script>
 </body>
 </html>
