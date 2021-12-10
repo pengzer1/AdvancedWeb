@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     birth: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+    }, 
     postcode: {
       type: DataTypes.STRING,
       allowNull: false,
