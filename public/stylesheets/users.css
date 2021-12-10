@@ -65,6 +65,11 @@ p {
 .items .item_div:hover > ul {
   display: block;
 }
+.items .item_div > ul > li {
+  width: 250px;
+  text-align: center;
+  margin-bottom: 10px;
+}
 .items .text_div {
   width: 250px;
   height: 30px;

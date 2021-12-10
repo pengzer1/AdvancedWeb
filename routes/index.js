@@ -336,7 +336,7 @@ router.get('/users', function(req, res, next) {
   let search1 = search.split(' ');
   let a = search1[0];
   let b = search1[1];
-  var sql = "SELECT image, name, birth FROM users WHERE modifyAddress LIKE '%" + a + "%' AND modifyAddress LIKE '%" + b + "%' ORDER BY rand() LIMIT 8";
+  var sql = "SELECT image, name, date_format(birth, '%Y-%m-%d') birth, intro FROM users WHERE modifyAddress LIKE '%" + a + "%' AND modifyAddress LIKE '%" + b + "%' ORDER BY rand() LIMIT 8";
   var sql2 = "SELECT count(*) as count FROM users WHERE modifyAddress LIKE '%" + a + "%' AND modifyAddress LIKE '%" + b + "%' ORDER BY rand() LIMIT 8";
 
   client.query(sql, function (err, rows) {

@@ -23,8 +23,9 @@
                     for(var i = 0; i < length && i < 8; i++) {%>
                 <a><div><div class="item_div"><img src="<%= rows[i].image %>">
                     <ul>
-                        <li><div class="text_div"><%=rows[i].birth%></div></li>
-                        <li><div class="text_div"><%=rows[i].intro%></div></li>
+                        <li>닉네임: <%=rows[i].name%></li>
+                        <li>생일: <%=rows[i].birth%></li>
+                        <li>자기소개: <%=rows[i].intro%></li>
                     </ul>
                     </div> 
                     <%if(rows[i].name == session.name){%>
