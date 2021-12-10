@@ -6,6 +6,11 @@
             <% if(session.email) { %> 
             <li><%= session.name %></li>
             <li><a href="/logout">로그아웃</a></li>
+            <li><a href="/message/1">쪽지</a>
+                <% if(mail) { %>
+                    <%=mail%>
+                <% } %>
+            </li>
             <li><a href="/pwConfirm">마이페이지</a></li>
             <% } else { %>
             <li><a href="/sign_in">로그인</a></li>

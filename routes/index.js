@@ -5,6 +5,7 @@ var models = require('../models');
 var crypto = require('crypto');
 var sequelize = require('sequelize');
 var Op = sequelize.Op;
+var fs = require('fs');
 
 var client = mysql.createConnection({
   host: 'localhost',
@@ -23,12 +24,14 @@ client.connect(e => {
 })
 
 let session;
+let mail = 0;
 let searchWord;
 let searchRange;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   session = req.session;
-  res.render('index', { title: 'Neighbor', session: session });
+  console.log(mail);
+  res.render('index', { title: 'Neighbor', session: session, mail: mail});
 });
 
 // 로그인 GET
@@ -70,7 +73,12 @@ router.post("/sign_in", async function(req,res,next){
         req.session.postcode = result.dataValues.postcode;
         req.session.modifyAddress = result.dataValues.modifyAddress;
         req.session.detailAddress = result.dataValues.detailAddress;
-        res.redirect('/');
+        client.query("select count(*) as count from sms where toWho='"+req.session.name+"' and stat='no'", function(countErr, countResult){
+          if (countErr) console.error("err : " + countErr);
+          mail=countResult[0].count;
+          console.log(mail);
+          res.redirect('/');
+        });
     }
     else{
         console.log("비밀번호 불일치");
@@ -131,8 +139,74 @@ router.post('/sign_up', function(req, res, next) {
 
   res.redirect("/sign_in");
 });
+//지도
+router.get('/map', function(req, res, next){
+  fs.readFile('./data.json', 'utf8', function (err, data){
+    let rData = JSON.parse(data);
+    res.render('map', { session: session, rData });
+  });
+});
+//쪽지 페이지
+router.get('/smsPopup/:who', function(req,res,next){
+  let who = req.params.who;
+  res.render('smsPopup', {session:session, who:who});
+});
+//쪽지 post
+router.post('/sendSms/:to/:from', function(req,res,next){
+  let body = req.body;
+  let toWho = req.params.to;
+  let fromWho = req.params.from;
 
+  models.sms.create({
+    toWho: toWho,
+    fromWho: fromWho,
+    cont: body.input,
+    stat: "no"
+  })
+      .then( result => {
+          console.log("데이터 추가 완료");
+          res.redirect("/mainBoard");
+      })
+      .catch( err => {
+          console.log("데이터 추가 실패");
+      })
+});
+//쪽지 삭제
+router.get('/delMsg/:id', function(req, res, next){
+  let id = req.params.id;
+  models.sms.destroy({where: {id: id}});
+  res.redirect("/message/1");
+});
 
+router.get('/message/:page', function(req,res,next){
+  var page = req.params.page;
+  client.query("select count(*) as count from sms where toWho='"+req.session.name+"' and stat='no'", function(countErr, countResult){
+    if (countErr) console.error("err : " + countErr);
+    mail=countResult[0].count;
+    console.log(mail);
+  });
+  var sql = "select id, fromWho, cont, date_format(createdAt,'%Y-%m-%d') createdAt, stat from sms where toWho = '" + session.name + "'";
+  client.query(sql, function (err, rows) {
+    if (err) console.error(err);
+    client.query("select count(*) as count from sms where toWho= '"+session.name+"'" , (countQueryErr, countQueryResult) => {
+      if (countQueryErr) console.error("err : " + countQueryErr);
+      res.render('message', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, session:session, search: false, mail: mail});
+    });
+    
+});
+});
+router.get('/readMsg/:who/:id', function(req,res,next){
+  var id = req.params.id;
+  var who = req.params.who;
+  client.query("select * from sms where id='"+id+"'", (err, row) =>{
+    if (err) console.error(err);
+    models.sms.update({
+      stat: 'yes',
+    }, {where: {id: id}}
+    );
+    res.render('readMsg', {session: session, row: row, who: who});
+  });
+});
 
 router.get('/mainBoard', function(req, res, next){
   var sql = "select id, listName, name, title, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'";
@@ -140,7 +214,7 @@ router.get('/mainBoard', function(req, res, next){
     if (err) console.error(err);
         client.query("select count(*) as count from texts where listName = '취미' or listName = '낙서장' or listName = '핫추' or listName = '고민상담소'" , (countQueryErr, countQueryResult) => {
           if (countQueryErr) console.error("err : " + countQueryErr);
-          res.render('mainBoard', {rows: rows, length:countQueryResult[0].count, session:session});
+          res.render('mainBoard', {rows: rows, length:countQueryResult[0].count, session:session, mail: mail});
         });
   });
         
@@ -157,7 +231,7 @@ var whe = req.params.whe;
       if(err) console.error(err);
         client.query("select * from cmts where textId='"+id+"'", function(selErr, selRes){
           if(selErr) console.error(selErr);
-            res.render('textForm', {row:row[0], session:session, cmt:selRes, where:whe, id:id});
+            res.render('textForm', {row:row[0], session:session, cmt:selRes, where:whe, id:id, mail: mail});
         });
   });
 });
@@ -169,7 +243,7 @@ router.get('/editText/:whe/:id/modify', function(req,res,next) {
   var sql = "select id, name, title, input from texts where id=?";
   client.query(sql, [id], function(err,row) {
     if(err) console.error(err);
-    res.render('editText', {row:row[0], where: whe, session: session, id: id});
+    res.render('editText', {row:row[0], where: whe, session: session, id: id, mail: mail});
   });
 });
 //Text 삭제 기능
@@ -203,7 +277,7 @@ router.get('/list/:whe/:page',function(req,res,next)
         if (err) console.error(err);
         client.query("select count(*) as count from texts where listName= '"+whe+"'" , (countQueryErr, countQueryResult) => {
           if (countQueryErr) console.error("err : " + countQueryErr);
-          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: false});
+          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: false, mail: mail});
         });
         
     });
@@ -221,7 +295,7 @@ router.post('/list/:whe/search/', function(req,res,next){
       if(err) console.error(err);
       client.query("select count(*) as count from texts where "+ searchRange +" LIKE '%"+searchWord+"%' AND listName = '" + whe + "'", (countQueryErr, countQueryResult) => {
         if(countQueryErr) console.error("err : " + countQueryErr);
-        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true});
+        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true, mail: mail});
       });
     });
 });
@@ -236,22 +310,22 @@ router.get('/list/:whe/search/:page', function(req,res,next){
       if(err) console.error(err);
       client.query("select count(*) as count from texts where "+ searchRange +" LIKE '%"+searchWord+"%' AND listName = '" + whe + "'", (countQueryErr, countQueryResult) => {
         if(countQueryErr) console.error("err : " + countQueryErr);
-        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true});
+        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true, mail: mail});
       });
     });
 });
 
 router.get('/map', function(req, res, next){
-  res.render('map', { session: session });
+  res.render('map', { session: session, mail: mail });
 });
 router.get('/chat', function(req, res, next){
-  res.render('chat', { session: session });
+  res.render('chat', { session: session, mail: mail });
 });
 //editText
 router.get('/editText/:whe', function(req, res, next){
   let whe = req.params.whe;
   let row = -1;
-  res.render('editText', {where: whe, row:row, session:session});
+  res.render('editText', {where: whe, row:row, session:session, mail: mail});
 });
 //마이페이지 내가 쓴 글
 router.get('/myPage/:page', function(req,res,next){
@@ -261,16 +335,16 @@ router.get('/myPage/:page', function(req,res,next){
         if (err) console.error(err);
         client.query("select count(*) as count from texts where name= '"+session.name+"'" , (countQueryErr, countQueryResult) => {
           if (countQueryErr) console.error("err : " + countQueryErr);
-          res.render('myPage', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, session:session});
+          res.render('myPage', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, session:session, mail: mail});
         });
         
     });
 });
 router.get('/delId', function(req,res,next){
-  res.render('delId', {session:session});
+  res.render('delId', {session:session, mail: mail});
 });
 router.get('/profile', function(req,res,next){
-  res.render('profile', {session:session});
+  res.render('profile', {session:session, mail: mail});
 });
 //editText 수정 Post 부분
 router.post('/mod/:whe', function(req, res, next) {
@@ -337,7 +411,7 @@ router.post('/deleteCmt/:whe/:id', async function(req,res,next){
 });
 
 router.get('/pwConfirm', function(req, res, next){
-  res.render('pwConfirm', { session: session });
+  res.render('pwConfirm', { session: session , mail: mail});
 });
 //마이페이지 비밀번호 확인
 router.post('/pwConfirm', async function(req, res, next){
@@ -370,7 +444,7 @@ router.post('/pwConfirm', async function(req, res, next){
 });
 
 router.get('/profile', function(req, res, next){
-  res.render('profile', {rows: rows, session: session, data: data});
+  res.render('profile', {rows: rows, session: session, data: data, mail: mail});
 });
 //프로필 변경 기능
 router.post('/profile', async function(req, res, next){
@@ -394,7 +468,7 @@ router.post('/profile', async function(req, res, next){
 });
 
 router.get('/delId', function(req, res, next){
-  res.render('delId', { session: session });
+  res.render('delId', { session: session , mail: mail});
 });
 //회원탈퇴 기능
 router.post('/delId', async function(req, res, next){

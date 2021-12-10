@@ -70,9 +70,27 @@
                    }else{
                        var data = rows[i]
                    %>
-                   <li>
+                   <li style="border-bottom: 1px solid #ebebea;">
                         <div class="name"><a href="/textForm/<%=where%>/<%=data.id%>"><%=data.title%></a></div>
-                        <div class="who"><%=data.name%></div>
+                        <div class="who">
+                            <!--버튼 토글-->
+                            <button id="tog<%=i%>" value="unvis" 
+                                onclick="
+                                if(this.value == 'unvis'){
+                                    this.nextSibling.nextSibling.style.display='block';
+                                    this.value = 'vis';
+                                }
+                                else {
+                                    this.nextSibling.nextSibling.style.display='none'; 
+                                    this.value='unvis';
+                                }"
+                                style="width: 110px; border: 0; outline: 0; font-size: 15px; background-color: white; cursor: pointer;">
+                                <%=data.name%>
+                            </button>
+                            <ul id="1">
+                                <li id="2"><a href="/smsPopup/<%=data.name%>">쪽지 보내기</a></li>
+                            </ul>
+                        </div>
                         <div class="date"><%=data.createdAt%></div>
                         <div class="comment">댓글</div>
                    </li>
@@ -108,4 +126,10 @@
     
     <% include footer %>
 </body>
+<script>
+    function openWindowPop(url, name){
+    var options = 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
+}
+</script>
 </html>
