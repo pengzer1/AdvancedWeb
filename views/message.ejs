@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/message.css">
+    <title>Neighbor</title>
+</head>
+<body>
+    <% include header %>
+    <div id="out">
+    <div class="showBoard">
+        <div class="test" id="event">
+            <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
+                <span id="title">쪽지함</span>
+            </nav>
+            <ul class="boardList">
+               <li>
+                    <ul id="attribute">
+                        <li style="margin-left:230px; line-height: 30px;">내용</li>
+                        <li style="margin-left:260px; line-height: 30px;">작성자</li>
+                        <li style="margin-left:80px; margin-right: 155px; line-height: 30px;">수신일</li>
+                    </ul>
+               </li>
+               
+           
+               
+               <%
+               if(length == 0){}
+               else{
+               for(var i = (length-1) - ((page-1) * page_num); i > (length-1) - (page * page_num); i--) {
+               if(i < 0){
+                   i--;
+               }else{
+                   var data = rows[i]
+               %>
+               <li style="border-bottom: 1px solid #ebebea;">
+                <% if(data.stat == 'yes'){%>
+                    <div class="nameRead"><a href="/readMsg/<%=data.fromWho%>/<%=data.id%>"><%=data.cont%></a></div>
+                <%}else{%>
+                    <div class="name"><a href="/readMsg/<%=data.fromWho%>/<%=data.id%>"><%=data.cont%></a></div>
+                    <%}%>
+                    <% if(data.stat == 'yes'){%>
+                    <div class="who">
+                        <!--버튼 토글-->
+                        <span id="tog" value="unvis"
+                            style="width: 110px; border: 0; outline: 0; font-size: 15px; color: rgb(190, 188, 188);">
+                            <%=data.fromWho%>
+                        </span>
+                    </div>
+                    <%}else{%>
+                        <div class="who">
+                            <!--버튼 토글-->
+                            <span id="tog" value="unvis"
+                                style="width: 110px; border: 0; outline: 0; font-size: 15px;">
+                                <%=data.fromWho%>
+                            </span>
+                        </div>
+                        <%}%>
+                        <% if(data.stat == 'yes'){%>
+                    <div class="dateRead"><%=data.createdAt%></div>
+                    <%}else{%>
+                        <div class="date"><%=data.createdAt%></div>
+                        <%}%>
+                    <button type="button" onclick="location.href='/delMsg/<%=data.id%>'">삭제</button>
+               </li>
+               <% }
+               }
+            }
+               %>
+            </ul>
+            <div class="paging">
+                <%
+                    for(var j = 0; j < rows.length / page_num; j++){
+                    %>
+                    [<a href="<%= j + 1 %>"><%= j + 1 %></a>]
+                    <%
+                    }
+                    %>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

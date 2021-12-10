@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/smsPopup.css">
+    <title>Neighbor</title>
+</head>
+<body>
+    <div>
+        <header>쪽지 보내기</header>
+        <form action="/sendSms/<%=who%>/<%=session.name%>" method="post">
+            <div id="in"><textarea name="input" required></textarea></div>
+            <button type="submit">전송</button>
+        </form>
+    </div>
+</body>
+</html>

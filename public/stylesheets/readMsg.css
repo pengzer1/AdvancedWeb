@@ -1,0 +1,44 @@
+/*header*/
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    outline: none;
+  }
+
+  body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+
+  header{
+      width: 455px;
+      text-align: center;
+      background-color: rgb(143, 240, 240);
+  }
+#show{
+    width:450px;
+    height: 150px;
+    border: 1px solid #ebebea;
+}
+  textarea{
+    width: 450px;
+    height: 50px;
+    resize: none;
+    font-size: 20px;
+  }
+  button {
+    width: 455px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid skyblue;
+    cursor: pointer;
+    color: white;
+    background-color: skyblue;
+    padding: 5px;
+  }
