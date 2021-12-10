@@ -18,7 +18,10 @@
     
     <% include header %>
 
-    <form autocomplete="off" action="/sign_up" accept-charset="utf-8" class="sign_up" name="sign_up" method="post">
+    <form autocomplete="off" action="/sign_up" enctype="multipart/form-data" accept-charset="utf-8" class="sign_up" name="sign_up" method="post">
+        <div>
+            사진<br><input name='image' type='file' accept='image/png, image/jpeg, image/jpg'>
+        </div>
         <div>
             닉네임<br><input type="text" id="name" name="name" placeholder="닉네임" onfocus="this.placeholder=''" onblur="this.placeholder='닉네임'" required>
         </div>

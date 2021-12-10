@@ -12,13 +12,14 @@ var app = express();
 
 var models = require("./models/index.js");
 
+
+
 models.sequelize.sync().then( () => {
   console.log(" DB 연결 성공");
 }).catch(err => {
   console.log("연결 실패");
   console.log(err);
 })
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +34,8 @@ app.use(session({
     maxAge: 24000 * 60 * 60 // 쿠키 유효기간 24시간
   }
 }));
+
+app.locals.cdata = require('./chicken.json');
 
 app.use(logger('dev'));
 app.use(express.json());

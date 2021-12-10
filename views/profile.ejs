@@ -33,7 +33,10 @@
                 <nav class="range" style="display:flex; padding-top:50px; margin-left: 30px;">
                     <span id="title">프로필 변경</span>
                 </nav>
-                <form method="post" action="" style="margin-top:20px;  margin-left: 50px;"> 
+                <form method="post" action="" enctype="multipart/form-data" style="margin-top:20px;  margin-left: 50px;"> 
+                    <div>
+                        이미지<input type='file' name='image' accept="image/jpeg, image/jpg, image/png">
+                    </div>
                     <div>
                         닉네임 <span style="margin-left: 50px;"><%= session.name %> </span>
                     </div>

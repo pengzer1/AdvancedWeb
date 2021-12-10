@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/users.css">   
+    <script src="https://kit.fontawesome.com/a5f3739fb3.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Neighbor</title>
+</head>
+
+<body>
+    <% include header%>
+
+    <div class="display2">
+        <p id="newProd">근처 유저</p>
+        <div class="items">
+        <% if (length === 0) { %>
+            <div>유저 없음</div>
+            <% } else { 
+                for(var i = 0; i < length && i < 8; i++) {%>
+            <a href="sebu.html"><div><div class="item_div"><img src="<%= rows[i].image %>"></div><div class="text_div"><%=rows[i].name%></div></div></a>
+            <% } } %>
+        </div>
+    </div>
+
+ <% include footer %>
+    <script async src="index.js"></script>
+</body>
+</html>

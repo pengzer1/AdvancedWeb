@@ -13,7 +13,6 @@
 </head>
 <body>
     <% include header %>
-
     <div id="outter">
         <div id="wrapImageDiv">
             <div id="picture">
@@ -23,13 +22,13 @@
             <% if(session.email) {%>
             <ul>
                 <li><button onclick="location.href='/mainBoard'">게시판</button></li>
-                <li><button onclick="location.href='/map'">지도</button></li>
+                <li><button onclick="location.href='/users'">유저</button></li>
                 <li><button onclick="location.href='/chat'">채팅</button></li>
             </ul>
             <% } else { %>
             <ul>
                 <li><button onclick="location.href='/sign_in'">게시판</button></li>
-                <li><button onclick="location.href='/sign_in'">지도</button></li>
+                <li><button onclick="location.href='/sign_in'">유저</button></li>
                 <li><button onclick="location.href='/sign_in'">채팅</button></li>
             </ul>
             <% } %> 

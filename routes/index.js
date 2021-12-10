@@ -4,7 +4,22 @@ var mysql = require('mysql2');
 var models = require('../models');
 var crypto = require('crypto');
 var sequelize = require('sequelize');
+var fs = require('fs');
+var multer = require('multer');
+var path = require('path');
 var Op = sequelize.Op;
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/');
+  },
+  filename: function(req,file, cb) {
+    const ext = path.extname(file.originalname);
+    cb(null, path.basename(file.originalname, ext) + '-' + Date.now() + ext);
+  }
+});
+
+var upload = multer({ storage: storage });
 
 var client = mysql.createConnection({
   host: 'localhost',
@@ -63,6 +78,7 @@ router.post("/sign_in", async function(req,res,next){
         models.user.findAll({ where: {email: result.email}}).then(result => {
           req.session.name = result;
         })
+        req.session.image = result.dataValues.image;
         req.session.name = dbName;
         req.session.email = body.email;
         req.session.phone = result.dataValues.phone;
@@ -110,14 +126,15 @@ router.get('/sign_up', function(req, res, next){
 });
 
 //회원가입 Form
-router.post('/sign_up', function(req, res, next) {
+router.post('/sign_up', upload.single('image'), function(req, res, next) {
   let body = req.body;
-
+  let image = '/images/'+ req.file.filename;
   let inputPassword = body.pw;
   let salt = Math.round((new Date().valueOf() * Math.random())) + "";
   let hashpw = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
 
-  let result = models.user.create({
+  models.user.create({
+    image: image,
     name: body.name,
     email: body.email,
     pw: hashpw,
@@ -229,21 +246,39 @@ router.post('/list/:whe/search/', function(req,res,next){
 router.get('/list/:whe/search/:page', function(req,res,next){
   let whe = req.params.whe;
   let page = req.params.page;
-  console.log(searchRange);
-  console.log(searchWord);
-    var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where "+ searchRange +" LIKE '%" + searchWord + "%' AND listName = '" + whe + "'";
-    client.query(sql, function (err, rows) {
-      if(err) console.error(err);
-      client.query("select count(*) as count from texts where "+ searchRange +" LIKE '%"+searchWord+"%' AND listName = '" + whe + "'", (countQueryErr, countQueryResult) => {
-        if(countQueryErr) console.error("err : " + countQueryErr);
-        res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true});
-      });
+  var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where "+ searchRange +" LIKE '%" + searchWord + "%' AND listName = '" + whe + "'";
+  client.query(sql, function (err, rows) {
+    if(err) console.error(err);
+    client.query("select count(*) as count from texts where "+ searchRange +" LIKE '%"+searchWord+"%' AND listName = '" + whe + "'", (countQueryErr, countQueryResult) => {
+      if(countQueryErr) console.error("err : " + countQueryErr);
+      res.render('seoulList',{rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: true});
     });
+  });
+});
+//근처 유저
+router.get('/users', function(req, res, next) {
+  let search = session.modifyAddress;
+  let search1 = search.split(' ');
+  let a = search1[0];
+  let b = search1[1];
+  var sql = "SELECT image, name, birth FROM users WHERE modifyAddress LIKE '%" + a + "%' AND modifyAddress LIKE '%" + b + "%' ORDER BY rand() LIMIT 8";
+  var sql2 = "SELECT count(*) as count FROM users WHERE modifyAddress LIKE '%" + a + "%' AND modifyAddress LIKE '%" + b + "%' ORDER BY rand() LIMIT 8";
+
+  client.query(sql, function (err, rows) {
+    if(err) console.error(err);
+    client.query(sql2, function (countErr, countRows) {
+      res.render('users', { session: session, length: countRows[0].count, rows: rows });
+    });
+  });
 });
 
 router.get('/map', function(req, res, next){
-  res.render('map', { session: session });
+  fs.readFile('./chicken.json', 'utf8', function (err, data){
+    let rData = JSON.parse(data);
+    res.render('map', { session: session, rData });
+  });
 });
+  
 router.get('/chat', function(req, res, next){
   res.render('chat', { session: session });
 });
@@ -373,8 +408,9 @@ router.get('/profile', function(req, res, next){
   res.render('profile', {rows: rows, session: session, data: data});
 });
 //프로필 변경 기능
-router.post('/profile', async function(req, res, next){
+router.post('/profile', upload.single('image'),async function(req, res, next){
   let body = req.body;
+  let image = '/images/' + req.file.filename;
 
   let result = await models.user.findOne({
     where: {
@@ -387,7 +423,7 @@ router.post('/profile', async function(req, res, next){
       let salt = result.dataValues.salt;
       let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
 
-      models.user.update({pw: hashPassword, phone: body.phone, birth: body.birth, postcode: body.postcode, modifyAddress: body.modifyAddress, detailAddress: body.detailAddress},{where : { email: session.email }});
+      models.user.update({image: image, pw: hashPassword, phone: body.phone, birth: body.birth, postcode: body.postcode, modifyAddress: body.modifyAddress, detailAddress: body.detailAddress},{where : { email: session.email }});
 
       res.redirect('/');
     }
