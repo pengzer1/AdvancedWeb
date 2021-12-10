@@ -21,12 +21,39 @@
                 <div>유저 없음</div>
                 <% } else { 
                     for(var i = 0; i < length && i < 8; i++) {%>
-                <a><div><div class="item_div"><img src="<%= rows[i].image %>"><div class="text_div"><button><%=rows[i].name%></button></div>
+                <a><div><div class="item_div"><img src="<%= rows[i].image %>">
                     <ul>
                         <li><div class="text_div"><%=rows[i].birth%></div></li>
                         <li><div class="text_div"><%=rows[i].intro%></div></li>
                     </ul>
-                    </div></div></a>
+                    </div> 
+                    <%if(rows[i].name == session.name){%>
+                        <button id="tog<%=i%>" value="unvis"
+                            style="width: 250px; border: 0; outline: 0; font-size: 15px; background-color: white;">
+                            <%=rows[i].name%>
+                        </button>
+                        <%}else{%>
+                        <button id="tog<%=i%>" value="unvis"
+                            onclick="
+                            if(this.value == 'unvis'){
+                                this.nextSibling.nextSibling.style.display='block';
+                                this.value = 'vis';
+                            }
+                            else {
+                                this.nextSibling.nextSibling.style.display='none'; 
+                                this.value='unvis';
+                            }"
+                            style="width: 250px; border: 0; outline: 0; font-size: 15px; background-color: white; cursor: pointer;">
+                            <%=rows[i].name%>
+                        </button>
+                        <%}%>
+                    <ul id="1" style="display: none;">
+                        <li id="2">
+                            <button onclick="location.href='/smsPopup/<%=rows[i].name%>'" style="width: 250px; border: 0; outline: 0; font-size: 15px; background-color: white; cursor: pointer;">
+                                쪽지 보내기
+                            </button>
+                        </li>
+                    </ul></div></a>
                 <% } } %>
             </div>
         </div>
