@@ -341,8 +341,10 @@ router.get('/users', function(req, res, next) {
 
   client.query(sql, function (err, rows) {
     if(err) console.error(err);
+    console.log("띠용");
     client.query(sql2, function (countErr, countRows) {
-      res.render('users', { session: session, length: countRows[0].count, rows: rows });
+      console.log("띠띠용");
+      res.render('users', { length: countRows[0].count, rows: rows, session: session, mail: mail });
     });
   });
 });

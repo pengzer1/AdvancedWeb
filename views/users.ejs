@@ -13,19 +13,18 @@
 </head>
 
 <body>
-    <% include header%>
-
+    <% include header %>
     <div class="display2">
         <p id="newProd">근처 유저</p>
         <div class="items">
-        <% if (length === 0) { %>
-            <div>유저 없음</div>
-            <% } else { 
-                for(var i = 0; i < length && i < 8; i++) {%>
-            <a href="sebu.html"><div><div class="item_div"><img src="<%= rows[i].image %>"></div><div class="text_div"><%=rows[i].name%></div></div></a>
-            <% } } %>
+            <% if (length === 0) { %>
+                <div>유저 없음</div>
+                <% } else { 
+                    for(var i = 0; i < length && i < 8; i++) {%>
+                <a><div><div class="item_div"><img src="<%= rows[i].image %>"></div><ul><li><div class="text_div"><%=rows[i].name%></div></li><li><%=rows[i].birth%></li></ul></div></a>
+                <% } } %>
+            </div>
         </div>
-    </div>
 
  <% include footer %>
     <script async src="index.js"></script>
