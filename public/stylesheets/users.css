@@ -57,6 +57,14 @@ p {
   width: 250px;
   height: 300px;
 }
+.items .item_div > ul {
+  display: none;
+  position: absolute;
+  background: white;
+}
+.items .item_div:hover > ul {
+  display: block;
+}
 .items .text_div {
   width: 250px;
   height: 30px;
