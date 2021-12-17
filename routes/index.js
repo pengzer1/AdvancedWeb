@@ -7,8 +7,6 @@ var sequelize = require('sequelize');
 var fs = require('fs');
 var multer = require('multer');
 var path = require('path');
-var Op = sequelize.Op;
-var fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
