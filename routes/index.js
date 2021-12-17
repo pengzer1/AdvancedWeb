@@ -363,7 +363,7 @@ router.get('/editText/:whe', function(req, res, next){
 //마이페이지 내가 쓴 글
 router.get('/myPage/:page', function(req,res,next){
     var page = req.params.page;
-    var sql = "select id, name, title, listName, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where name = '" + session.name + "'";
+    var sql = "select id, name, title, listName, input, cmtCount, date_format(createdAt,'%Y-%m-%d') createdAt from texts where name = '" + session.name + "'";
     client.query(sql, function (err, rows) {
         if (err) console.error(err);
         client.query("select count(*) as count from texts where name= '"+session.name+"'" , (countQueryErr, countQueryResult) => {
