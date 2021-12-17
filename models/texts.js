@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     input: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    cmtCount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   });
   return texts;
