@@ -1,213 +1,211 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-    text-decoration: none;
-    color: black; 
-    outline: none;
-  }
-#outter{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  outline: none;
 }
-  .signBar{
-      display: flex;
-      justify-content: end;
-      align-items: center;
-      background-color: #a9f5e1;
-      height: 40px;
-  }
-  .logo {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-  }
-  .top {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 13px;
-  }
-  .top a {
-    color: #088a85;
-    font-size: 15px; 
-    outline: none;
-  }
-  .top li {
-    padding: 0px 20px;
-  }
+#outter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #a9f5e1;
+  height: 40px;
+}
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+.top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.top a {
+  color: #088a85;
+  font-size: 15px;
+  outline: none;
+}
+.top li {
+  padding: 0px 20px;
+}
 
 /*body*/
-#wholeBoard{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+#wholeBoard {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
-#list{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 250px;
-    height: 600px;
+#list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 600px;
 }
-.child{
-    font-size: 14px;
-    margin-left: 30px;
+.child {
+  font-size: 14px;
+  margin-left: 30px;
 }
 .child li {
-    margin-top: 10px;
+  margin-top: 10px;
 }
-.child li a:hover{
-    text-decoration: underline;
-    cursor: pointer;
+.child li a:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
-#showBoard{
-    width: 900px;
-    height: 600px;
-    margin-left: 100px;
+#showBoard {
+  width: 900px;
+  height: 600px;
+  margin-left: 100px;
 }
-.listTitle{
-    font-size: 18px;
-    border-top: 3px solid #ebebea;
-    border-bottom: 1px solid #ebebea;
+.listTitle {
+  font-size: 18px;
+  border-top: 3px solid #ebebea;
+  border-bottom: 1px solid #ebebea;
 }
 
 .eventBody {
-    width: 806px;
-  }
-  
-  .showBoard {
-    width: 955px;
-    height: 500px;
-  }
-  .showBoard .test {
-    position: absolute;
-    width: 955px;
-    height: 500px;
-  }
-  #title{
-      width:120px;
-      font-size: 20px;
-  }
-  .showBoard .boardList {
-    width: 895px;
-    height: 428px;
-    margin-left: 30px;
-    border-top: 1px solid #ebebea;
-  }
-  .showBoard .boardList li{
-        display: flex;
-        height: 40px;
-        margin-top: 5px;
-        margin-left: 38px;
-        text-align: center;
-        line-height: 40px;
-  }
-  .boardList .name {
-    width: 490px;
-    height: 45px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .boardList .who {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .who > ul{
-    position:absolute;
-    margin-top: -15px;
-    margin-left: 5px;
-    font-size: 13px;
-    display: none;
-  }
-  .who > ul > li{
-    padding:0px;
-    background-color: white;
-    border: 1px solid #c1c1c1;
-  }
-  .boardList .date {
-    width: 150px;
-    height: 45px;
-  }
-  
-  .boardList .comment {
-    width: 85px;
-    height: 45px;
-  }
-.name a:hover{
-    text-decoration: underline;
+  width: 806px;
 }
-  #attribute {
-    display: flex;
-    border-bottom: 1px solid gray;
-  }
-  
 
-  #goInput{
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid skyblue;
-    cursor: pointer;
-    color: white;
-    background-color: skyblue;
-    padding: 5px;
-    margin-left: 800px;
-  }
-  .paging {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 895px;
-      height: 50px;
-    margin-left: 30px;
-    background-color: #f9f9f8;
-    
-  }
-  #search{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-      width:895px;
-      height: 50px;
-      margin-left: 30px;
-      background-color: #f9f9f8;
-      border-top: 1px solid #ebebea;
-  }
-#searchRange{
-    width: 100px;
-    height: 30px;
+.showBoard {
+  width: 955px;
+  height: 500px;
 }
-#searchWhat{
-    width: 200px;
-    height: 25px;
+.showBoard .test {
+  position: absolute;
+  width: 955px;
+  height: 500px;
 }
-#goSearch{
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid skyblue;
-    cursor: pointer;
-    color: white;
-    background-color: skyblue;
-    padding: 5px;
+#title {
+  width: 120px;
+  font-size: 20px;
 }
-    /*footer*/
-    .others {
-        display: flex;
-        justify-content: center;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 50px;
-        height: 200px;
-        border-top: 1px solid black;
-      }
-      
-      /*너비 줄어들면 어느순간 고정*/
-      @media screen and (max-width: 1100px) {
-        html {
-          width: 1100px;
-        }
-      }
-      
+.showBoard .boardList {
+  width: 895px;
+  height: 428px;
+  margin-left: 30px;
+  border-top: 1px solid #ebebea;
+}
+.showBoard .boardList li {
+  display: flex;
+  height: 40px;
+  margin-top: 5px;
+  margin-left: 38px;
+  text-align: center;
+  line-height: 40px;
+}
+.boardList .name {
+  width: 490px;
+  height: 45px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.boardList .who {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.who > ul {
+  position: absolute;
+  margin-top: -15px;
+  margin-left: 5px;
+  font-size: 13px;
+  display: none;
+}
+.who > ul > li {
+  padding: 0px;
+  background-color: white;
+  border: 1px solid #c1c1c1;
+}
+.boardList .date {
+  width: 150px;
+  height: 45px;
+}
+
+.boardList .comment {
+  width: 85px;
+  height: 45px;
+}
+.name a:hover {
+  text-decoration: underline;
+}
+#attribute {
+  display: flex;
+  border-bottom: 1px solid gray;
+}
+
+#goInput {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid skyblue;
+  cursor: pointer;
+  color: white;
+  background-color: skyblue;
+  padding: 5px;
+  margin-left: 800px;
+}
+.paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 895px;
+  height: 50px;
+  margin-left: 30px;
+  background-color: #f9f9f8;
+}
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 895px;
+  height: 50px;
+  margin-left: 30px;
+  background-color: #f9f9f8;
+  border-top: 1px solid #ebebea;
+}
+#searchRange {
+  width: 100px;
+  height: 30px;
+}
+#searchWhat {
+  width: 200px;
+  height: 25px;
+}
+#goSearch {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid skyblue;
+  cursor: pointer;
+  color: white;
+  background-color: skyblue;
+  padding: 5px;
+}
+/*footer*/
+.others {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+  height: 200px;
+  border-top: 1px solid black;
+}
+
+/*너비 줄어들면 어느순간 고정*/
+@media screen and (max-width: 1100px) {
+  html {
+    width: 1100px;
+  }
+}
