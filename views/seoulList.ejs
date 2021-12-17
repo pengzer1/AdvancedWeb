@@ -68,7 +68,7 @@
                    if(i < 0){
                        i--;
                    }else{
-                       var data = rows[i]
+                       var data = rows[i];
                    %>
                    <li style="border-bottom: 1px solid #ebebea;">
                         <div class="name"><a href="/textForm/<%=where%>/<%=data.id%>"><%=data.title%></a></div>
@@ -99,7 +99,7 @@
                             </ul>
                         </div>
                         <div class="date"><%=data.createdAt%></div>
-                        <div class="comment">댓글</div>
+                        <div class="comment"><%=data.cmtCount%></div>
                    </li>
                    <% }
                    }

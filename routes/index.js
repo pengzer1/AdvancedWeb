@@ -289,12 +289,13 @@ router.get('/list/:whe/:page',function(req,res,next)
 {
     var whe = req.params.whe;
     var page = req.params.page;
-    var sql = "select id, name, title, input, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '" + whe + "'";
+    var sql = "select id, name, title, input, cmtCount, date_format(createdAt,'%Y-%m-%d') createdAt from texts where listName = '" + whe + "'";
     client.query(sql, function (err, rows) {
         if (err) console.error(err);
         client.query("select count(*) as count from texts where listName= '"+whe+"'" , (countQueryErr, countQueryResult) => {
           if (countQueryErr) console.error("err : " + countQueryErr);
-          res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: false, mail: mail});
+            if (countQueryErr) console.error("err : " + errRows);
+            res.render('seoulList', {rows: rows, page:page, length:countQueryResult[0].count, page_num:8, pass:true, where:whe, session:session, search: false, mail: mail});
         });
         
     });
@@ -400,7 +401,8 @@ router.post('/edt/:whe', function(req, res, next) {
     listName: body.listName,
     name: name,
       title: body.title,
-      input: body.input
+      input: body.input,
+      cmtCount: 0
   })
       .then( result => {
           console.log("데이터 추가 완료");
@@ -415,6 +417,8 @@ router.post('/createCmt/:whe/:id', function(req, res, next){
   let where = req.params.whe;
   let id = req.params.id;
   let body = req.body;
+
+  client.query("update texts set cmtCount = cmtCount+1 where id='" +id+"'");
   models.cmts.create({
     textId: id,
     name: body.nickName,
@@ -434,6 +438,7 @@ router.post('/deleteCmt/:whe/:id', async function(req,res,next){
   let body = req.body;
 
   let result = await models.cmts.findOne({ where: { id: body.id, textId: id, name: body.name, content: body.content }});
+  client.query("update texts set cmtCount = cmtCount-1 where id='" +id+"'");
   if(result === null) console.log("값 없음");
   else{
     console.log("값 있음");
